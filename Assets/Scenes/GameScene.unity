@@ -238,7 +238,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerSpeed: 10
-  TimeDivider: 3
 --- !u!61 &823628573
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -408,6 +407,7 @@ GameObject:
   - component: {fileID: 1385185920}
   - component: {fileID: 1385185919}
   - component: {fileID: 1385185922}
+  - component: {fileID: 1385185923}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -502,13 +502,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 823628575}
-  offset: {x: 0, y: 0, z: 0}
   xOffset: 0
   yOffset: 0
-  offsetDefault: {x: 0, y: 0, z: 0}
   movementSpeed: 0.05
   zoomFactor: 1
+  gameMenu: {fileID: 1385185923}
   zoomSpeed: 5
+--- !u!114 &1385185923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385185918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3998f9ed330b83479c63c0c5aee79ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPaused: 0
 --- !u!1 &1634185158
 GameObject:
   m_ObjectHideFlags: 0

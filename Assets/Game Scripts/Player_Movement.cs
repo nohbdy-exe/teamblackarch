@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Player_Movement : MonoBehaviour
 {
-    public float PlayerSpeed = 2f;
-    public int TimeDivider = 3;
+    [SerializeField]
+    protected float PlayerSpeed = 2f;
+    protected int TimeDivider = 3;
     
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,7 @@ public class Player_Movement : MonoBehaviour
     }
 
     //Character Movement
-    public void PlayerMovement()
+    void PlayerMovement()
     {
         //Get Character Position
         Vector3 pos = transform.position;
