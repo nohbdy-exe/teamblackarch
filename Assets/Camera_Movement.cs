@@ -54,43 +54,43 @@ public class Camera_Movement : MonoBehaviour
         //Setting Inputs
         //slowly animates camera movement for smoother transition
         if (Input.GetKey("w"))
-        {   SetZoom(1.0f);
-            yOffset = .5f;
+        {   SetZoom(1f);
+            yOffset = .05f;
         }
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            SetZoom(1.0f);
-            yOffset = .5f;
+            SetZoom(1f);
+            yOffset = .05f;
         }
         if (Input.GetKey("s"))
         {
-            SetZoom(1.0f);
-            yOffset = -.5f;
+            SetZoom(1f);
+            yOffset = -.05f;
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            SetZoom(1.0f);
-            yOffset = -.5f;
+            SetZoom(1f);
+            yOffset = -.05f;
         }
         if (Input.GetKey("a"))
         {
-            SetZoom(1.0f);
-            xOffset = -.5f;
+            SetZoom(1f);
+            xOffset = -.05f;
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            SetZoom(1.0f);
-            xOffset = -.5f;
+            SetZoom(1f);
+            xOffset = -.05f;
         }
         if (Input.GetKey("d"))
         {
-            SetZoom(1.0f);
-            xOffset = .5f;
+            SetZoom(1f);
+            xOffset = .05f;
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            SetZoom(1.0f);
-            xOffset = .5f;
+            SetZoom(1f);
+            xOffset = .05f;
         }
         if (!Input.anyKey)
         {
