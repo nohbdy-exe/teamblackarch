@@ -16,7 +16,7 @@ public class Camera_Movement : MonoBehaviour
     [SerializeField]
     protected float movementSpeed = 3f;
     [SerializeField]
-    protected float zoomFactor = 1.0f;
+    protected float zoomFactor = 0f;
     protected bool movementKeysEnabled = true;
     public GameMenuLauncher gameMenu;
     [SerializeField]

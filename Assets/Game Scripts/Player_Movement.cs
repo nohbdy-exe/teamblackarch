@@ -7,11 +7,12 @@ public class Player_Movement : MonoBehaviour
     [SerializeField]
     protected float PlayerSpeed = 2f;
     protected int TimeDivider = 3;
+    Rigidbody2D rb;
     
     // Start is called before the first frame update
     void Start()
     {
-
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -23,45 +24,6 @@ public class Player_Movement : MonoBehaviour
     //Character Movement
     void PlayerMovement()
     {
-        //Get Character Position
-        Vector3 pos = transform.position;
-        
-        //WASD movement
-        if (Input.GetKey("w"))
-        {
-            pos.y += PlayerSpeed * Time.deltaTime / TimeDivider;
-        }
-        if (Input.GetKey("s"))
-        {
-            pos.y -= PlayerSpeed * Time.deltaTime / TimeDivider;
-        }
-        if (Input.GetKey("a"))
-        {
-            pos.x -= PlayerSpeed * Time.deltaTime / TimeDivider;
-        }
-        if (Input.GetKey("d"))
-        {
-            pos.x += PlayerSpeed * Time.deltaTime / TimeDivider;
-        }
-
-        //Arrowkey movement
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            pos.y += PlayerSpeed * Time.deltaTime/TimeDivider;
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            pos.y -= PlayerSpeed * Time.deltaTime/TimeDivider;
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            pos.x -= PlayerSpeed * Time.deltaTime/TimeDivider;
-        }
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            pos.x += PlayerSpeed * Time.deltaTime/TimeDivider;
-        }
-
-        transform.position = pos;
+        rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * PlayerSpeed, Input.GetAxisRaw("Vertical") * PlayerSpeed);
     }
 }
