@@ -1,5 +1,6 @@
 # teamblackarch
 for cs478
+# Game Title: Cambion
 
 This is our 2d RPG made in Unity.
 
