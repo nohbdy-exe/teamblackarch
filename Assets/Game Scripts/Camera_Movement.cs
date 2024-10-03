@@ -100,7 +100,7 @@ public class Camera_Movement : MonoBehaviour
             }
             if (!Input.anyKey)
             {
-                SetZoom(0.9f);
+                SetZoom(0.98f);
                 xOffset = 0;
                 yOffset = 0;
             }

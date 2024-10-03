@@ -8,6 +8,7 @@ public class Player_Movement : MonoBehaviour
     protected float PlayerSpeed = 2f;
     protected int TimeDivider = 3;
     Rigidbody2D rb;
+    Vector2 checkMovement;
     
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,12 @@ public class Player_Movement : MonoBehaviour
     //Character Movement
     void PlayerMovement()
     {
-        rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * PlayerSpeed, Input.GetAxisRaw("Vertical") * PlayerSpeed);
+        if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) >0.1f) {
+            rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal")*PlayerSpeed,0);
+        }
+        else {
+            rb.velocity = new Vector2(0,Input.GetAxisRaw("Vertical")*PlayerSpeed);
+        }
+
     }
 }
