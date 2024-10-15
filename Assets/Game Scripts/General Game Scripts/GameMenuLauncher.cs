@@ -6,11 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class GameMenuLauncher : MonoBehaviour
 {
-    public bool isPaused=false;
+    public bool isPaused = false;
+    public GameObject pauseMenuUI;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -23,18 +24,29 @@ public class GameMenuLauncher : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!isPaused)
+            if (isPaused == false)
             {
+                Pause();
                 isPaused = true;
-                Time.timeScale = 0;
-                
+  
             }
-            else if (isPaused)
+            else if (isPaused == true)
             {
+                Resume();
                 isPaused = false;
-                Time.timeScale = 1;
-                
             }
         }
+    }
+    public void Pause()
+    {
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0;
+        
+    }
+    public void Resume()
+    {
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1;
+        
     }
 }
