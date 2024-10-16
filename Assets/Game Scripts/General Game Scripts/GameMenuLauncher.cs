@@ -11,7 +11,7 @@ public class GameMenuLauncher : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -22,31 +22,33 @@ public class GameMenuLauncher : MonoBehaviour
 
     void PauseCheck()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyUp(KeyCode.Escape))
         {
             if (isPaused == false)
             {
-                Pause();
                 isPaused = true;
+                Pause();
   
             }
             else if (isPaused == true)
             {
-                Resume();
                 isPaused = false;
+                Resume();
             }
         }
     }
     public void Pause()
     {
-        pauseMenuUI.SetActive(true);
-        Time.timeScale = 0;
         
+        Time.timeScale = 0;
+        pauseMenuUI.SetActive(true);
+
     }
     public void Resume()
     {
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1;
         
+        Time.timeScale = 1;
+        pauseMenuUI.SetActive(false);
+
     }
 }
