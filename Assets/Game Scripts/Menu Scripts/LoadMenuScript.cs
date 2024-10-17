@@ -24,7 +24,8 @@ public class LoadMenuScript : MonoBehaviour
         }
         else
         {
-            DataPersistanceManager.Instance.NewGame();
+            SceneManager.LoadScene("Level_1");
+            //DataPersistanceManager.Instance.NewGame();
         }
     }
 
@@ -36,7 +37,7 @@ public class LoadMenuScript : MonoBehaviour
         }
         else
         {
-            DataPersistanceManager.Instance.NewGame();
+            //DataPersistanceManager.Instance.NewGame();
         }
     }
 
@@ -48,7 +49,7 @@ public class LoadMenuScript : MonoBehaviour
         }
         else
         {
-            DataPersistanceManager.Instance.NewGame();
+            //DataPersistanceManager.Instance.NewGame();
         }
     }
 
