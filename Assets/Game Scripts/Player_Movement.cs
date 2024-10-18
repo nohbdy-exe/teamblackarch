@@ -7,7 +7,9 @@ public class Player_Movement : MonoBehaviour
     [SerializeField]
     protected float PlayerSpeed = 2f;
     protected int TimeDivider = 3;
+    private bool isOnWater = false;
     Rigidbody2D rb;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,11 @@ public class Player_Movement : MonoBehaviour
     void Update()
     {
         PlayerMovement();
+        
+        if (!isOnWater) // prohibiting movement whilst on water
+        {
+            PlayerMovement();
+        }
     }
 
     //Character Movement
@@ -26,4 +33,21 @@ public class Player_Movement : MonoBehaviour
     {
         rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * PlayerSpeed, Input.GetAxisRaw("Vertical") * PlayerSpeed);
     }
+
+    // Disabling Water Walking
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Water"))
+        {
+            isOnWater = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Water"))
+        {
+            isOnWater = false;
+        }
+    }
+    
 }
