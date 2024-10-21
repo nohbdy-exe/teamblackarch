@@ -24,7 +24,9 @@ public class LoadMenuScript : MonoBehaviour
         }
         else
         {
-            DataPersistanceManager.Instance.NewGame();
+            SceneManager.LoadScene(3);
+            //Working out issues with save system to make this new game instance function
+            //DataPersistanceManager.Instance.NewGame();
         }
     }
 
@@ -36,7 +38,9 @@ public class LoadMenuScript : MonoBehaviour
         }
         else
         {
-            DataPersistanceManager.Instance.NewGame();
+            SceneManager.LoadScene(3);
+            //Working out issues with save system to make this new game instance function
+            //DataPersistanceManager.Instance.NewGame();
         }
     }
 
@@ -48,7 +52,9 @@ public class LoadMenuScript : MonoBehaviour
         }
         else
         {
-            DataPersistanceManager.Instance.NewGame();
+            SceneManager.LoadScene(3);
+            //Working out issues with save system to make this new game instance function
+            //DataPersistanceManager.Instance.NewGame();
         }
     }
 

@@ -14,7 +14,7 @@ public class GameData
     {
         this.playerLocation = new Vector2 (0f,0f);
         this.playerLvl = 1;
-        this.sceneNumber = 5;
+        this.sceneNumber = 3;
     }
 
 }

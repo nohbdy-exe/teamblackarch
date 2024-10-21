@@ -28,6 +28,7 @@ public class DataPersistanceManager : MonoBehaviour
 
     public void NewGame()
     {
+        int sceneNum = gameData.sceneNumber;
         this.gameData = new GameData();
         SceneManager.LoadScene(gameData.sceneNumber);
     }
