@@ -20,13 +20,12 @@ public class LoadMenuScript : MonoBehaviour
     {
         if (SavePresent1 == true)
         {
-
+            DataPersistanceManager.Instance.filename = "Game1Data.Json";
+            DataPersistanceManager.Instance.LoadGame();
         }
         else
         {
-            SceneManager.LoadScene(3);
-            //Working out issues with save system to make this new game instance function
-            //DataPersistanceManager.Instance.NewGame();
+            DataPersistanceManager.Instance.NewGame();
         }
     }
 
@@ -34,13 +33,12 @@ public class LoadMenuScript : MonoBehaviour
     {
         if (SavePresent2 == true)
         {
-
+            DataPersistanceManager.Instance.filename = "Game2Data.Json";
+            DataPersistanceManager.Instance.LoadGame();
         }
         else
         {
-            SceneManager.LoadScene(3);
-            //Working out issues with save system to make this new game instance function
-            //DataPersistanceManager.Instance.NewGame();
+            DataPersistanceManager.Instance.NewGame();
         }
     }
 
@@ -48,13 +46,12 @@ public class LoadMenuScript : MonoBehaviour
     {
         if (SavePresent3 == true)
         {
-
+            DataPersistanceManager.Instance.filename = "Game3Data.Json";
+            DataPersistanceManager.Instance.LoadGame();
         }
         else
         {
-            SceneManager.LoadScene(3);
-            //Working out issues with save system to make this new game instance function
-            //DataPersistanceManager.Instance.NewGame();
+            DataPersistanceManager.Instance.NewGame();
         }
     }
 

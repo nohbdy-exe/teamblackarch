@@ -522,6 +522,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 321760366}
+  - component: {fileID: 321760367}
   m_Layer: 5
   m_Name: DataPersistanceManager
   m_TagString: Untagged
@@ -544,6 +545,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2124341468}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &321760367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321760365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0094bbd9d8c66084388f3d011d4bcb1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filename: 
 --- !u!1 &350379144
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,7 +1075,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 777559063}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 415068166}
+        m_TargetAssemblyTypeName: PauseMenuScript, Assembly-CSharp
+        m_MethodName: SaveGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &777559063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1216,7 +1242,6 @@ GameObject:
   - component: {fileID: 823628571}
   - component: {fileID: 823628577}
   - component: {fileID: 823628578}
-  - component: {fileID: 823628579}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1397,18 +1422,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &823628579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 823628570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1f1082580c03614ca837c39e270cd27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1000779832
 GameObject:
   m_ObjectHideFlags: 0
@@ -2346,13 +2359,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 415068165}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 415068166}
+        m_TargetAssemblyTypeName: PauseMenuScript, Assembly-CSharp
+        m_MethodName: OpenOptions
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
