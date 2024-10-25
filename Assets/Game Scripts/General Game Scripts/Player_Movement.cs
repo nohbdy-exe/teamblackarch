@@ -25,6 +25,8 @@ public class Player_Movement : MonoBehaviour
         UpdateAnimation();
     }
 
+    
+
     //Character Movement
     void PlayerMovement()
     {

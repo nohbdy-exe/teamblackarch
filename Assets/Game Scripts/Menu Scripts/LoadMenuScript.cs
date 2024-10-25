@@ -20,12 +20,13 @@ public class LoadMenuScript : MonoBehaviour
     {
         if (SavePresent1 == true)
         {
-
+            DataPersistanceManager.Instance.filename = "Game1Data.game";
+            DataPersistanceManager.Instance.LoadGame();
         }
         else
         {
-            SceneManager.LoadScene("Level_1");
-            //DataPersistanceManager.Instance.NewGame();
+            DataPersistanceManager.Instance.filename = "Game1Data.game";
+            DataPersistanceManager.Instance.NewGame();
         }
     }
 
@@ -33,11 +34,13 @@ public class LoadMenuScript : MonoBehaviour
     {
         if (SavePresent2 == true)
         {
-
+            DataPersistanceManager.Instance.filename = "Game2Data.game";
+            DataPersistanceManager.Instance.LoadGame();
         }
         else
         {
-            //DataPersistanceManager.Instance.NewGame();
+            DataPersistanceManager.Instance.filename = "Game2Data.game";
+            DataPersistanceManager.Instance.NewGame();
         }
     }
 
@@ -45,11 +48,13 @@ public class LoadMenuScript : MonoBehaviour
     {
         if (SavePresent3 == true)
         {
-
+            DataPersistanceManager.Instance.filename = "Game3Data.game";
+            DataPersistanceManager.Instance.LoadGame();
         }
         else
         {
-            //DataPersistanceManager.Instance.NewGame();
+            DataPersistanceManager.Instance.filename = "Game3Data.game";
+            DataPersistanceManager.Instance.NewGame();
         }
     }
 

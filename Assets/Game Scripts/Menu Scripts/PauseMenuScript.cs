@@ -13,6 +13,16 @@ public class PauseMenuScript : MonoBehaviour
         gameMenuLauncher.Resume();
         gameMenuLauncher.isPaused = false;
     }
+    public void SaveGame()
+    {
+        // Uses DataPersistanceManager to save game
+        DataPersistanceManager.Instance.SaveGame();
+    }
+    public void OpenOptions()
+    {
+        Debug.Log("Opening Options Menu");
+        SceneManager.LoadScene(2);
+    }
     public void QuitGame()
     {
         //Returns to Main Menu
