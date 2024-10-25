@@ -122,7 +122,7 @@ public class Camera_Movement : MonoBehaviour
     }
     void pauseTracker()
     {
-        if (gameMenu.isPaused==true)
+        if (gameMenu.isPaused == true)
         {
             movementKeysEnabled = false;
         }
