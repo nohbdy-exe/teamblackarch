@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using UnityEngine.Rendering;
 
 
 public class DataPersistanceManager : MonoBehaviour
 {
+    [Header("File Storage Config")]
+    public string filename;
 
     private GameData gameData;
     private List<IDataPersistance> dataPersistanceObjects;
+    private FileDataHandler dataHandler;
 
     public static DataPersistanceManager Instance { get; private set; }
 
@@ -23,7 +27,10 @@ public class DataPersistanceManager : MonoBehaviour
     }
     private void Start()
     {
+        this.dataHandler = new FileDataHandler(Application.persistentDataPath, filename);
         this.dataPersistanceObjects = FindAllDataPersistanceObjects();
+        Debug.Log("Initializing Game");
+        Debug.Log(Application.persistentDataPath);
     }
 
     public void NewGame()
@@ -34,6 +41,9 @@ public class DataPersistanceManager : MonoBehaviour
     
     public void LoadGame()
     {
+        //Load any saved data from a file GameData FileDataHandler.Load()
+        this.gameData = dataHandler.Load();
+
         //If no data can be loaded intitialize new game
         if (this.gameData == null) 
         {
@@ -57,8 +67,11 @@ public class DataPersistanceManager : MonoBehaviour
         {
             dataPersistanceObj.saveData(ref gameData);
         }
-    }
 
+        // Save data to a file using the data handler
+        dataHandler.Save(gameData);
+    }
+   
     private void OnApplicationQuit()
     {
         
