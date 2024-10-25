@@ -1,0 +1,3 @@
+[submodule "teamblackarch"]
+	path = teamblackarch
+	url = https://github.com/nohbdy-exe/teamblackarch.git
