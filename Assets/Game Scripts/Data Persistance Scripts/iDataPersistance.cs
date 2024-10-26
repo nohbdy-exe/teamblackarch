@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public interface IDataPersistance
+public interface IDataPersistence
 {
-    void loadData(GameData data);
-    void saveData(ref GameData data);
+    void LoadData(GameData data);
+    void SaveData(ref GameData data);
 
 }

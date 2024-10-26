@@ -6,16 +6,16 @@ using System.Linq;
 using UnityEngine.Rendering;
 
 
-public class DataPersistanceManager : MonoBehaviour
+public class DataPersistenceManager : MonoBehaviour
 {
     [Header("File Storage Config")]
     public string filename;
 
     private GameData gameData;
-    private List<IDataPersistance> dataPersistanceObjects;
+    private List<IDataPersistence> dataPersistanceObjects;
     private FileDataHandler dataHandler;
 
-    public static DataPersistanceManager Instance { get; private set; }
+    public static DataPersistenceManager Instance { get; private set; }
 
     private void Awake()
     {
@@ -53,9 +53,9 @@ public class DataPersistanceManager : MonoBehaviour
         }
 
         //push data to all other scripts that need it
-        foreach(IDataPersistance dataPersistanceObj in dataPersistanceObjects)
+        foreach(IDataPersistence dataPersistenceObj in dataPersistanceObjects)
         {
-            dataPersistanceObj.loadData(gameData);
+            dataPersistenceObj.LoadData(gameData);
         }
     }
 
@@ -63,9 +63,9 @@ public class DataPersistanceManager : MonoBehaviour
     public void SaveGame()
     {
         //pass data to other scripts so they can update
-        foreach (IDataPersistance dataPersistanceObj in dataPersistanceObjects)
+        foreach (IDataPersistence dataPersistenceObj in dataPersistanceObjects)
         {
-            dataPersistanceObj.saveData(ref gameData);
+            dataPersistenceObj.SaveData(ref gameData);
         }
 
         // Save data to a file using the data handler
@@ -77,10 +77,11 @@ public class DataPersistanceManager : MonoBehaviour
         
     }
 
-    private List<IDataPersistance> FindAllDataPersistanceObjects()
+    private List<IDataPersistence> FindAllDataPersistanceObjects()
     {
-        IEnumerable<IDataPersistance> dataPersistanceObjects = FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistance>();
+        IEnumerable<IDataPersistence> dataPersistanceObjects = FindObjectsOfType<MonoBehaviour>()
+            .OfType<IDataPersistence>();
 
-        return new List<IDataPersistance>(dataPersistanceObjects);
+        return new List<IDataPersistence>(dataPersistanceObjects);
     }
 }
