@@ -8,7 +8,7 @@ public class OptionsMenuScript : MonoBehaviour
     //Returns player to the Main Menu
     public void ReturnToMainFromOptions()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(3);
     }
     
     
