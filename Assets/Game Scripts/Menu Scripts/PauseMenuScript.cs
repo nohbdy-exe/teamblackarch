@@ -29,5 +29,6 @@ public class PauseMenuScript : MonoBehaviour
         Debug.Log("Quiting Game");
         SceneManager.LoadScene(0);
     }
+    
 
 }

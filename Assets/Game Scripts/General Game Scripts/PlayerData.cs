@@ -19,16 +19,18 @@ public class PlayerData : MonoBehaviour, IDataPersistence
     public void SaveData(ref GameData data)
     {
         SetDataToSave();
-        data.playerLvl = playerLevel;
-        data.sceneNumber = sceneNum;
-        data.playerLocation = playerLoc;
+        data.playerLvl = this.playerLevel;
+        data.sceneNumber = this.sceneNum;
+        data.playerLocation = this.playerLoc;
+        Debug.Log("Attempting to save scene number to " + playerLevel.ToString() + ", Player location to x: " + playerLoc.x.ToString() + ", y: " + playerLoc.y.ToString() + ", z: " + playerLoc.z.ToString() + ", Player level to: " + playerLevel.ToString());
+        Debug.Log("Data saved scene number to " + data.playerLvl.ToString() + ", Player location to x: " + data.playerLocation.x.ToString() + ", y: " + data.playerLocation.y.ToString() + ", z: " + data.playerLocation.z.ToString() + ", Player level to: " + data.playerLvl.ToString());
     }
     private void SetDataToSave()
     {
         sceneNum = SceneManager.GetActiveScene().buildIndex;
         playerLoc = this.transform.position;
         playerLevel = 3;
-        Debug.Log("Scene number saved to " + sceneNum.ToString() + ", Player location saved to x: " + playerLoc.x.ToString() + ", y: " + playerLoc.y.ToString() + ", z: " + playerLoc.z.ToString() + ", Player level saved to: " + playerLevel.ToString());
+        Debug.Log("Attempting to save scene number saved to " + sceneNum.ToString() + ", Player location saving to x: " + playerLoc.x.ToString() + ", y: " + playerLoc.y.ToString() + ", z: " + playerLoc.z.ToString() + ", Player level saving to: " + playerLevel.ToString());
 
     }
     private void SetDataToLoad()

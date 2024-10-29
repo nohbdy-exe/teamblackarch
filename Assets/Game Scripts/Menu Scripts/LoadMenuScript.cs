@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,6 @@ public class LoadMenuScript : MonoBehaviour
     public bool SavePresent1 = false;
     public bool SavePresent2 = false;
     public bool SavePresent3 = false;
-
     //Returns player to the Main Menu
     public void ReturnToMainFromLoadMenu()
     {
@@ -20,13 +20,13 @@ public class LoadMenuScript : MonoBehaviour
     {
         if (SavePresent1 == true)
         {
-            DataPersistenceManager.Instance.filename = "Game1Data";
+
             DataPersistenceManager.Instance.LoadGame();
         }
         else
         {
-            DataPersistenceManager.Instance.filename = "Game1Data";
             DataPersistenceManager.Instance.NewGame();
+            SavePresent1 = true;
         }
     }
 
@@ -34,13 +34,14 @@ public class LoadMenuScript : MonoBehaviour
     {
         if (SavePresent2 == true)
         {
-            DataPersistenceManager.Instance.filename = "Game2Data";
+           
             DataPersistenceManager.Instance.LoadGame();
         }
         else
         {
-            DataPersistenceManager.Instance.filename = "Game2Data";
+            
             DataPersistenceManager.Instance.NewGame();
+            SavePresent2 = true;
         }
     }
 
@@ -48,13 +49,14 @@ public class LoadMenuScript : MonoBehaviour
     {
         if (SavePresent3 == true)
         {
-            DataPersistenceManager.Instance.filename = "Game3Data";
+            
             DataPersistenceManager.Instance.LoadGame();
         }
         else
         {
-            DataPersistenceManager.Instance.filename = "Game3Data";
+            
             DataPersistenceManager.Instance.NewGame();
+            SavePresent3 = true;
         }
     }
 
