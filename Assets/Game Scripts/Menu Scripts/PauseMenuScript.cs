@@ -16,7 +16,7 @@ public class PauseMenuScript : MonoBehaviour
     public void SaveGame()
     {
         // Uses DataPersistanceManager to save game
-        DataPersistanceManager.Instance.SaveGame();
+        DataPersistenceManager.Instance.SaveGame();
     }
     public void OpenOptions()
     {
