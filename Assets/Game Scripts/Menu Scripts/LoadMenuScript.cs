@@ -20,13 +20,13 @@ public class LoadMenuScript : MonoBehaviour
     {
         if (SavePresent1 == true)
         {
-            DataPersistanceManager.Instance.filename = "Game1Data.game";
-            DataPersistanceManager.Instance.LoadGame();
+            DataPersistenceManager.Instance.filename = "Game1Data.game";
+            DataPersistenceManager.Instance.LoadGame();
         }
         else
         {
-            DataPersistanceManager.Instance.filename = "Game1Data.game";
-            DataPersistanceManager.Instance.NewGame();
+            DataPersistenceManager.Instance.filename = "Game1Data.game";
+            DataPersistenceManager.Instance.NewGame();
         }
     }
 
@@ -34,13 +34,13 @@ public class LoadMenuScript : MonoBehaviour
     {
         if (SavePresent2 == true)
         {
-            DataPersistanceManager.Instance.filename = "Game2Data.game";
-            DataPersistanceManager.Instance.LoadGame();
+            DataPersistenceManager.Instance.filename = "Game2Data.game";
+            DataPersistenceManager.Instance.LoadGame();
         }
         else
         {
-            DataPersistanceManager.Instance.filename = "Game2Data.game";
-            DataPersistanceManager.Instance.NewGame();
+            DataPersistenceManager.Instance.filename = "Game2Data.game";
+            DataPersistenceManager.Instance.NewGame();
         }
     }
 
@@ -48,13 +48,13 @@ public class LoadMenuScript : MonoBehaviour
     {
         if (SavePresent3 == true)
         {
-            DataPersistanceManager.Instance.filename = "Game3Data.game";
-            DataPersistanceManager.Instance.LoadGame();
+            DataPersistenceManager.Instance.filename = "Game3Data.game";
+            DataPersistenceManager.Instance.LoadGame();
         }
         else
         {
-            DataPersistanceManager.Instance.filename = "Game3Data.game";
-            DataPersistanceManager.Instance.NewGame();
+            DataPersistenceManager.Instance.filename = "Game3Data.game";
+            DataPersistenceManager.Instance.NewGame();
         }
     }
 
