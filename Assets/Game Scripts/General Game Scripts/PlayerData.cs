@@ -5,16 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class PlayerData : MonoBehaviour, IDataPersistence
 {
-    private Vector3 playerLoc;
-    private int playerLevel;
-    private int sceneNum;
+    public Vector3 playerLoc;
+    public int playerLevel;
+    public int sceneNum;
 
     public void LoadData(GameData data)
     {
-        playerLoc = data.playerLocation;
-        playerLevel = data.playerLvl;
-        sceneNum = data.sceneNumber;
-        SetDataToLoad();
+        this.playerLoc = data.playerLocation;
+        this.playerLevel = data.playerLvl;
+        this.sceneNum = data.sceneNumber;
     }
     public void SaveData(ref GameData data)
     {
@@ -33,9 +32,12 @@ public class PlayerData : MonoBehaviour, IDataPersistence
         Debug.Log("Attempting to save scene number saved to " + sceneNum.ToString() + ", Player location saving to x: " + playerLoc.x.ToString() + ", y: " + playerLoc.y.ToString() + ", z: " + playerLoc.z.ToString() + ", Player level saving to: " + playerLevel.ToString());
 
     }
-    private void SetDataToLoad()
+    public void SetDataToLoad()
     {
-        this.transform.position = this.playerLoc;
-        SceneManager.LoadScene(sceneNum);
+        this.transform.position = playerLoc;
+    }
+    void Start()
+    {
+        SetDataToLoad();
     }
 }

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,7 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenuScript : MonoBehaviour
 {
-    public GameMenuLauncher gameMenuLauncher;
+    public LoadMenuScript loadScript; //= new LoadMenuScript();
+    public GameMenuLauncher gameMenuLauncher; //= new GameMenuLauncher();
     public void ResumeGame()
     {
         //Resumes Game
@@ -16,7 +18,9 @@ public class PauseMenuScript : MonoBehaviour
     public void SaveGame()
     {
         // Uses DataPersistanceManager to save game
+        Debug.Log("Saving Game Information");
         DataPersistenceManager.Instance.SaveGame();
+        gameMenuLauncher.GameWasSaved();
     }
     public void OpenOptions()
     {

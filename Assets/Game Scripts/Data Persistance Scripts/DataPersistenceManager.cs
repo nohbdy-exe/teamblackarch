@@ -8,11 +8,11 @@ using UnityEngine.Rendering;
 
 public class DataPersistenceManager : MonoBehaviour
 {
-    public string filename;
+    public string filename = "SaveData.game";
     private GameData gameData = new GameData();
     private List<IDataPersistence> dataPersistenceObjects;
     private FileDataHandler dataHandler;
-    private string namedFile;
+   
 
     public static DataPersistenceManager Instance { get; private set; }
 
@@ -50,7 +50,7 @@ public class DataPersistenceManager : MonoBehaviour
         {
             Debug.Log("No game data was found. Initializing data to defaults");
             NewGame();
-        
+            
         }
 
         //push data to all other scripts that need it
@@ -58,6 +58,12 @@ public class DataPersistenceManager : MonoBehaviour
         {
             dataPersistenceObj.LoadData(gameData);
         }
+
+        if (this.gameData != null)
+        {
+            SceneManager.LoadScene(gameData.sceneNumber);
+        }
+        Debug.Log("Player location loaded: " + gameData.playerLocation);
     }
 
 

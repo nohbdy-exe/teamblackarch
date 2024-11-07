@@ -9,6 +9,7 @@ public class GameData
     public int playerLvl;
     public int sceneNumber;
     
+    
     //This houses the values the game will start with when there is no data to load
     public GameData()
     {
