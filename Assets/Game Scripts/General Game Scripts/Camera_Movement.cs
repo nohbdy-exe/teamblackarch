@@ -61,22 +61,22 @@ public class Camera_Movement : MonoBehaviour
             if (Input.GetKey("w"))
             {
                 SetZoom(1f);
-                yOffset = .05f;
+                yOffset = 1.05f;
             }
             if (Input.GetKey(KeyCode.UpArrow))
             {
                 SetZoom(1f);
-                yOffset = .05f;
+                yOffset = 1.05f;
             }
             if (Input.GetKey("s"))
             {
                 SetZoom(1f);
-                yOffset = -.05f;
+                yOffset = .95f;
             }
             if (Input.GetKey(KeyCode.DownArrow))
             {
                 SetZoom(1f);
-                yOffset = -.05f;
+                yOffset = .95f;
             }
             if (Input.GetKey("a"))
             {
@@ -102,12 +102,12 @@ public class Camera_Movement : MonoBehaviour
             {
                 SetZoom(0.98f);
                 xOffset = 0;
-                yOffset = 0;
+                yOffset = 1;
             }
         }
         else
         {
-
+            // If game paused do nothing
         }
         
         float xTarget = Player.position.x + xOffset;
