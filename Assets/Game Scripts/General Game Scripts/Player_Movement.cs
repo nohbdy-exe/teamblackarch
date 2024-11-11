@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Player_Movement : MonoBehaviour
 {
-    [SerializeField]
-    protected float PlayerSpeed = 2f;
-    protected int TimeDivider = 3;
+    [SerializeField] protected float PlayerSpeed = 2f;
+    [SerializeField] protected int TimeDivider = 3;
     Rigidbody2D rb;
     Vector2 checkMovement;
-    public Animator animator;
+    [SerializeField] Animator animator;
+    [SerializeField] Dialog dialog;
+
     
     // Start is called before the first frame update
     void Start()
@@ -19,7 +21,7 @@ public class Player_Movement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void PlayerUpdate()
     {
         PlayerMovement();
         UpdateAnimation();
@@ -38,6 +40,10 @@ public class Player_Movement : MonoBehaviour
             rb.velocity = new Vector2(0,Input.GetAxisRaw("Vertical")*PlayerSpeed);
         }
 
+        if (Input.GetKeyDown(KeyCode.E)) {
+            CallDialog();
+        }
+
     }
 
     void UpdateAnimation() {
@@ -54,5 +60,9 @@ public class Player_Movement : MonoBehaviour
         else {
             animator.SetBool("Walking", false);
         }
+    }
+
+    void CallDialog() {
+        StartCoroutine(DialogManager.Instance.ShowDialog(dialog));
     }
 }
