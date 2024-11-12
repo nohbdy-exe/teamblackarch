@@ -16,11 +16,13 @@ public class LoadMenuScript : MonoBehaviour
     //Checks for load in save slot 1 if not loads new game
     public void Load()
     {
-        DataPersistenceManager.Instance.LoadGame();
+        
     }
     public void StartNewGame()
     {
         DataPersistenceManager.Instance.NewGame();
+
+        SceneManager.LoadSceneAsync("Level_1");
     }
 
  

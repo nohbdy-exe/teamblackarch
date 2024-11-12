@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenuScript : MonoBehaviour
 {
-    public LoadMenuScript loadScript; //= new LoadMenuScript();
+
     public GameMenuLauncher gameMenuLauncher; //= new GameMenuLauncher();
+    [SerializeField] private Button SaveGameButton;
     public void ResumeGame()
     {
         //Resumes Game
@@ -21,7 +23,9 @@ public class PauseMenuScript : MonoBehaviour
         Debug.Log("Saving Game Information");
         DataPersistenceManager.Instance.SaveGame();
         gameMenuLauncher.GameWasSaved();
+        
     }
+    
     public void OpenOptions()
     {
         Debug.Log("Opening Options Menu");
@@ -31,7 +35,9 @@ public class PauseMenuScript : MonoBehaviour
     {
         //Returns to Main Menu
         Debug.Log("Quiting Game");
-        SceneManager.LoadScene(0);
+        Time.timeScale = 1;
+        SceneManager.LoadSceneAsync(0);
+        
     }
     
 

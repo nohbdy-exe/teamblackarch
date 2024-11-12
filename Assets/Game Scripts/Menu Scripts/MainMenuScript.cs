@@ -2,29 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuScript : MonoBehaviour
 {
-    // Loads The Game Loader Scene
-    public void PlayGame()
+    [Header("Menu Buttons")]
+    [SerializeField] private Button newGameBtn;
+    [SerializeField] private Button continueGameBtn;
+    [SerializeField] private Button optionsBtn;
+    [SerializeField] private Button quitBtn;
+
+    private void Start()
     {
-        SceneManager.LoadScene(1);
+        if (!DataPersistenceManager.Instance.HasGameData())
+        {
+            continueGameBtn.interactable = false;
+        }
+    }
+    public void ContinueGame()
+    {
+        DisableMenuButtons();
+        SceneManager.LoadSceneAsync("Level_1");
     }
     
+    public void NewGame()
+    {
+        DisableMenuButtons();
+        DataPersistenceManager.Instance.NewGame();
+
+        SceneManager.LoadSceneAsync("Level_1");
+    }
+
     public void QuitGame()
     {
+        DisableMenuButtons();
         Application.Quit();
     }
 
     public void LoadOptionsMenu()
     {
+        DisableMenuButtons();
         SceneManager.LoadScene(2);
     }
-    
-    // Start is called before the first frame update
-    void Start()
+    private void DisableMenuButtons()
     {
-        
+        newGameBtn.interactable = false;
+        quitBtn.interactable = false;
+        continueGameBtn.interactable = false;
+        optionsBtn.interactable = false;
     }
 
     // Update is called once per frame
