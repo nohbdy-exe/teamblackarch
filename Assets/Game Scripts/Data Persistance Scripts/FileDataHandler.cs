@@ -43,6 +43,7 @@ public class FileDataHandler
                 Debug.LogError("Error occured while trying to load data from file: " + fullPath + "\n" + e);
             }
         }
+        
 
         return loadedData;
     }
