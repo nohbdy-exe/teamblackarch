@@ -8,10 +8,11 @@ public class GameMenuLauncher : MonoBehaviour
 {
     public bool isPaused = false;
     public GameObject pauseMenuUI;
+    public GameObject wasSavedUI;
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
@@ -28,7 +29,7 @@ public class GameMenuLauncher : MonoBehaviour
             {
                 isPaused = true;
                 Pause();
-  
+
             }
             else if (isPaused == true)
             {
@@ -39,16 +40,27 @@ public class GameMenuLauncher : MonoBehaviour
     }
     public void Pause()
     {
-        
+
         Time.timeScale = 0;
         pauseMenuUI.SetActive(true);
 
     }
     public void Resume()
     {
-        
+
         Time.timeScale = 1;
         pauseMenuUI.SetActive(false);
 
+    }
+    public void GameWasSaved()
+    {
+        wasSavedUI.SetActive(true);
+        StartCoroutine(waiter());
+        wasSavedUI.SetActive(false);
+    }
+    IEnumerator waiter()
+    {
+        //Wait for 2 seconds
+        yield return new WaitForSecondsRealtime(2);
     }
 }
