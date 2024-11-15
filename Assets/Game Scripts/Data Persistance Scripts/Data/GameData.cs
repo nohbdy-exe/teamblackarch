@@ -15,7 +15,7 @@ public class GameData
     {
         playerLocation = new Vector2 (0f,0f);
         playerLvl = 1;
-        sceneNumber = 3;
+        sceneNumber = 2;
     }
     
 

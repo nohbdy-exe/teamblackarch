@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 646875335153278320}
   - component: {fileID: 149948009341389589}
   m_Layer: 5
-  m_Name: DataPersistanceManager
+  m_Name: DataPersistenceManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
