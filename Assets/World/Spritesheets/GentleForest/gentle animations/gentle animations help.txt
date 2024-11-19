@@ -1,0 +1,63 @@
+
+
+"gentle waterfall A" has multiple rows of 6-frame looping animations. It is a 3-part waterfall system.
+
+Part 1: the top tile
+	Use the animation in row 1 or 2 to animate the very top/first tile of your waterfall.
+	Row 1 is for a diagonal edge. Mirror it as necessary.
+
+Part 2: the falling water
+	Place row 3 below the top tile, then row 4 below that.
+	Rows 3 and 4 are meant to stay together at all times.
+	The bottom of row 4 blends seamlessly into the top of row 3.
+	Repeat these (3,4,3,4,3,4,3, etc) for the length of your waterfall.
+	The last tile in the column of falling water can be either 3 or 4.
+
+Part 3: the splashing bottom
+	The remaining tiles are for your animated foamy splash at the bottom of the waterfall.
+	There are 3 sets of foamy splash, rows 5 and 6, rows 7 and 8, and rows 9 and 10. Always use them together like that.
+	
+	Place the front-facing splash (rows 7 and 8) on top of the bottom waterfall tile.
+	Row 7 should cover the last waterfall tile (it's going to be either row 3 or 4), so the flat bottom doesn't show.
+	
+	Rows 9 and 10 are your diagonal splash tile. Use them on columns where the top is the diagonal (row 1).	
+	Then under the row 10 tile, place the tile on row 6. It's technicaly a 3 tile-high animation.
+	Mirror these tiles as necessary, just like the top tile.
+	
+	The half-splash in rows 5 and 6 is for your end-caps.
+	It goes on the left or right (flip it) of your front-facing splash tile.
+
+-----------------------------------------
+
+"gentle water sparkles A" has three 3-frame looping animations, though you can flip and mirror them to make a sort of autotile.
+(don't rotate, the lines need to move horizontally)
+
+Row 1 has a full tile of sparkles.
+Row 2 has a diagonal half-tile of sparkles. Use these for inside corners.
+Row 3 has a small 1/4 tile of sparkles. Use these for outside corners.
+
+Advice:
+Don't cover the water with sparkles, or use easily identifiable patterns.
+Sprinkle them around the edges of the water.
+If you can turn them on and off at random, that might also look good.
+
+If you need 4-frame sparkle animations, you can find "water sparkles B" in my seasonal forest packs:
+https://itch.io/s/33657/-forest-of-seasons-bundle
+
+-----------------------------------------
+
+Lastly, there's a sample waterfall setup in bright red on the gentle forest tile sheet.
+This is here to show you how to setup the cliff wall tiles around it.
+The red waterfall is just there as a demo.
+
+-----------------------------------------
+
+Between this guide and my example maps, you should be able to figure out how to use my waterfalls.
+If you need further help, please join the Mana Seed Discord server where I or someone else can help you:
+	https://selieltheshaper.weebly.com/discord.html
+
+Thanks!
+Seliel the Shaper
+
+
+

@@ -1,0 +1,32 @@
+Hi there!
+
+If you're looking at this file, that means you're probably using RPG Maker MV.
+I have enlarged this tileset to 48x48 just for you!
+You should be able to use the main file just fine, but there are some drawbacks:
+
+It's not setup to work with MV's autotile system, so you need to place each tile by hand.
+
+The waterfall and water sparkle animations are also not setup under MV's rules.
+I think you can set them up as doodads, so give that a look:
+	http://www.yanfly.moe/wiki/Grid-Free_Doodads_VisuStella_MZ
+I've also heard you can set them up as events, or monsters.
+Though I think you'll need the 8-frame waterfall and 4-frame sparkles from my seasonal forest packs to make that work:
+	https://itch.io/s/33657/-forest-of-seasons-bundle
+I don't personally use MV, so I'm just going off second-hand information from people who do.
+
+Ultimately, I recommend different methods:
+
+Use Tiled and bypass MV's map editor:
+	https://thorbjorn.itch.io/tiled
+	https://archeia.itch.io/tiled-plugin-for-rpg-maker-mv
+
+Switch to 16x16 tiles so you can use this and my other assets without resizing:
+	https://forums.rpgmakerweb.com/index.php?threads/change-tile-size.46748/
+
+---------------------------------
+
+At any rate, you're welcome to join the Mana Seed Discord server and talk with other MV users to discuss your options.
+	https://selieltheshaper.weebly.com/discord.html
+
+Thanks!
+Seliel the Shaper
