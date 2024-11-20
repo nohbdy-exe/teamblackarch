@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class PauseMenuScript : MonoBehaviour
 {
-
+    
     public GameMenuLauncher gameMenuLauncher; //= new GameMenuLauncher();
     [SerializeField] private Button SaveGameButton;
     public void ResumeGame()
@@ -29,7 +29,7 @@ public class PauseMenuScript : MonoBehaviour
     public void OpenOptions()
     {
         Debug.Log("Opening Options Menu");
-        SceneManager.LoadScene(2);
+        gameMenuLauncher.OpenOptions();
     }
     public void QuitGame()
     {

@@ -9,7 +9,6 @@ public class MainMenuScript : MonoBehaviour
     [Header("Menu Buttons")]
     [SerializeField] private Button newGameBtn;
     [SerializeField] private Button continueGameBtn;
-    [SerializeField] private Button optionsBtn;
     [SerializeField] private Button quitBtn;
 
     private void Start()
@@ -39,17 +38,12 @@ public class MainMenuScript : MonoBehaviour
         Application.Quit();
     }
 
-    public void LoadOptionsMenu()
-    {
-        DisableMenuButtons();
-        SceneManager.LoadScene(2);
-    }
+  
     private void DisableMenuButtons()
     {
         newGameBtn.interactable = false;
         quitBtn.interactable = false;
         continueGameBtn.interactable = false;
-        optionsBtn.interactable = false;
     }
 
     // Update is called once per frame

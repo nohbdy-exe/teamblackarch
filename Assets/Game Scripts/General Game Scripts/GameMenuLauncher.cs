@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,9 @@ public class GameMenuLauncher : MonoBehaviour
     public bool isPaused = false;
     public GameObject pauseMenuUI;
     public GameObject wasSavedUI;
+    public GameObject optionMenuUI;
+    public float mySfxVolume=1;
+    public float myMusicVolume=1;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +23,7 @@ public class GameMenuLauncher : MonoBehaviour
     void Update()
     {
         PauseCheck();
+        
     }
 
     void PauseCheck()
@@ -58,6 +63,12 @@ public class GameMenuLauncher : MonoBehaviour
         StartCoroutine(waiter());
         wasSavedUI.SetActive(false);
     }
+    public void OpenOptions()
+    {
+        pauseMenuUI.SetActive(false);
+        optionMenuUI.SetActive(true);
+    }
+   
     IEnumerator waiter()
     {
         //Wait for 2 seconds

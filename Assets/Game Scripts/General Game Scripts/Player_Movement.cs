@@ -11,8 +11,10 @@ public class Player_Movement : MonoBehaviour
     Vector2 checkMovement;
     [SerializeField] Animator animator;
     [SerializeField] Dialog dialog;
-    AudioSource audioSource;
-
+    public AudioSource audioSource;
+    public OptionsMenuScript OptionSettings;
+    GameMenuLauncher gameMenuLauncher;
+    PlayerData playerData;
     
     // Start is called before the first frame update
     void Start()
@@ -20,6 +22,8 @@ public class Player_Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         transform.localScale = new Vector2(3,3);
         audioSource = GetComponent<AudioSource>();
+        
+        
     }
 
     // Update is called once per frame
@@ -45,7 +49,7 @@ public class Player_Movement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E)) {
             CallDialog();
         }
-
+        
         // footstep sound
         if (rb.velocity.magnitude > 0)
         {
