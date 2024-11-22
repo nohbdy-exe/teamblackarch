@@ -5,11 +5,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class PauseMenuScript : MonoBehaviour
 {
     
     public GameMenuLauncher gameMenuLauncher; //= new GameMenuLauncher();
+    public Color previousColor;
+    [SerializeField] private TextMeshProUGUI SaveGameButtonText;
     [SerializeField] private Button SaveGameButton;
     public void ResumeGame()
     {
@@ -17,15 +20,23 @@ public class PauseMenuScript : MonoBehaviour
         gameMenuLauncher.Resume();
         gameMenuLauncher.isPaused = false;
     }
+    
     public void SaveGame()
     {
         // Uses DataPersistanceManager to save game
         Debug.Log("Saving Game Information");
         DataPersistenceManager.Instance.SaveGame();
-        gameMenuLauncher.GameWasSaved();
+        Debug.Log("Data was saved.");
+        previousColor = SaveGameButton.image.color;
+        SaveGameButton.image.color = Color.green;
+        SaveGameButtonText.text = ("Saved");
+        IEnumerator waiter() { yield return new WaitForSecondsRealtime(1); SaveGameButton.image.color = previousColor; SaveGameButtonText.text = ("Game Saved"); SaveGameButtonText.text = ("Save"); }
+        StartCoroutine(waiter());
         
     }
+
     
+
     public void OpenOptions()
     {
         Debug.Log("Opening Options Menu");
