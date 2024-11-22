@@ -17,12 +17,15 @@ public class PlayerData : MonoBehaviour, IDataPersistence
     public int playerMaxLvl=5;
     public float playerMaxMana = 100;
     public float playerMaxHealth = 100;
+    /*
     [Header("Player HUD Info:")]
     [SerializeField] public GameObject PlayerLevelHUD;
     [SerializeField] public GameObject PlayerSkillPointsHUD;
     [SerializeField] public GameObject PlayerHealthHUD;
     [SerializeField] public GameObject PlayerManaHUD;
     [SerializeField] public GameObject PlayerExpHUD;
+    [SerializeField] public TextMeshProUGUI playerHealthText;
+    */
 
     public void LoadData(GameData data)
     {
@@ -57,7 +60,6 @@ public class PlayerData : MonoBehaviour, IDataPersistence
     {
         sceneNum = SceneManager.GetActiveScene().buildIndex;
         playerLoc = this.transform.position;
-        playerLevel = 3;
         //Debug.Log("Attempting to save scene number saved to " + sceneNum.ToString() + ", Player location saving to x: " + playerLoc.x.ToString() + ", y: " + playerLoc.y.ToString() + ", Player level saving to: " + playerLevel.ToString());
 
     }
@@ -90,13 +92,13 @@ public class PlayerData : MonoBehaviour, IDataPersistence
         if (playerHealth <= 0)
         {
             playerHealth = 0;
-           // PlayerHealthHUD.GetComponent<TextMeshProUGUI>(HealthBarText) = ("HP: " + playerHealth.ToString() + " / " + playerMaxHealth.ToString());
         }
         //Check to see if player's HP is higher than allowed
         if (playerHealth > playerMaxHealth)
         {
             playerHealth = playerMaxHealth;
         }
+        
     }
     public void CheckMPStatus()
     {
@@ -114,5 +116,7 @@ public class PlayerData : MonoBehaviour, IDataPersistence
     void Start()
     {
         this.SetDataToLoad();
+        
+
     }
 }
