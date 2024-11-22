@@ -9,7 +9,8 @@ using System.Linq.Expressions;
 
 public class OptionsMenuScript : MonoBehaviour
 {
-    public PlayerData playerInfo;
+    [SerializeField] public PlayerData playerInfo;
+    [SerializeField] public Player_Movement playerMovement;
     public bool musicMuted = false;
     public bool sfxMuted = false;
     public float musicVolume=1;
@@ -61,6 +62,7 @@ public class OptionsMenuScript : MonoBehaviour
             sfxMuted = false;
             sfxVolume = sfxSlider.value;
             btnSFX.image.sprite = VolumeUnmute;
+            
         }
         else if (!sfxMuted)
         {
@@ -70,6 +72,7 @@ public class OptionsMenuScript : MonoBehaviour
             sfxSlider.value = 0;
             btnSFX.image.sprite = VolumeMute;
         }
+        playerMovement.audioSource.volume = sfxVolume;
     }
     public void MusicVolumeChanged()
     {
@@ -101,7 +104,7 @@ public class OptionsMenuScript : MonoBehaviour
             btnSFX.image.sprite = VolumeMute;
             sfxMuted = true;
         }
-        
+        playerMovement.audioSource.volume = sfxVolume;
     }
     public void returnButtonPressed()
     {

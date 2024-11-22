@@ -9,7 +9,6 @@ public class GameMenuLauncher : MonoBehaviour
 {
     public bool isPaused = false;
     public GameObject pauseMenuUI;
-    public GameObject wasSavedUI;
     public GameObject optionMenuUI;
     public float mySfxVolume=1;
     public float myMusicVolume=1;
@@ -57,21 +56,12 @@ public class GameMenuLauncher : MonoBehaviour
         pauseMenuUI.SetActive(false);
 
     }
-    public void GameWasSaved()
-    {
-        wasSavedUI.SetActive(true);
-        StartCoroutine(waiter());
-        wasSavedUI.SetActive(false);
-    }
+   
     public void OpenOptions()
     {
         pauseMenuUI.SetActive(false);
         optionMenuUI.SetActive(true);
     }
    
-    IEnumerator waiter()
-    {
-        //Wait for 2 seconds
-        yield return new WaitForSecondsRealtime(2);
-    }
+    
 }
