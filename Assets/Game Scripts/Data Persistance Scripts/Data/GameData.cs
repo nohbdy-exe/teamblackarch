@@ -11,8 +11,10 @@ public class GameData
     public float playerHP;
     public float playerMP;
     public float playerXP;
-    public float playerXPReq;
+    public float playerXPMax;
     public int playerSkillPoints;
+    public float playerMaxHP;
+    public float playerMaxMP;
     
     
     //This houses the values the game will start with when there is no data to load
@@ -24,8 +26,10 @@ public class GameData
         playerHP = 100;
         playerMP = 100;
         playerXP = 0;
-        playerXPReq = 50;
+        playerXPMax = 50;
         playerSkillPoints = 0;
+        playerMaxHP = 100;
+        playerMaxMP = 100;
     }
     
 

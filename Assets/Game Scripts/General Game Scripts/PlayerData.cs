@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerData : MonoBehaviour, IDataPersistence
 {
@@ -11,9 +12,17 @@ public class PlayerData : MonoBehaviour, IDataPersistence
     public float playerHealth;
     public float playerMana;
     public float playerExp;
-    public float playerExpReq;
+    public float playerExpMax;
     public int playerSP;
     public int playerMaxLvl=5;
+    public float playerMaxMana = 100;
+    public float playerMaxHealth = 100;
+    [Header("Player HUD Info:")]
+    [SerializeField] public GameObject PlayerLevelHUD;
+    [SerializeField] public GameObject PlayerSkillPointsHUD;
+    [SerializeField] public GameObject PlayerHealthHUD;
+    [SerializeField] public GameObject PlayerManaHUD;
+    [SerializeField] public GameObject PlayerExpHUD;
 
     public void LoadData(GameData data)
     {
@@ -24,7 +33,9 @@ public class PlayerData : MonoBehaviour, IDataPersistence
         this.playerHealth = data.playerHP;
         this.playerMana = data.playerMP;
         this.playerExp = data.playerXP;
-        this.playerExpReq = data.playerXPReq;
+        this.playerExpMax = data.playerXPMax;
+        this.playerMaxHealth = data.playerMaxHP;
+        this.playerMaxMana = data.playerMaxMP;
     }
     public void SaveData(ref GameData data)
     {
@@ -35,7 +46,9 @@ public class PlayerData : MonoBehaviour, IDataPersistence
         data.playerHP = this.playerHealth;
         data.playerMP = this.playerMana;
         data.playerXP = this.playerExp;
-        data.playerXPReq = this.playerExpReq;
+        data.playerXPMax = this.playerExpMax;
+        data.playerMaxHP = this.playerMaxHealth;
+        data.playerMaxMP = this.playerMaxMana;
         //Debug.Log("Attempting to save scene number to " + playerLevel.ToString() + ", Player location to x: " + playerLoc.x.ToString() + ", y: " + playerLoc.y.ToString());
         //Debug.Log("Data saved scene number to " + data.playerLvl.ToString() + ", Player location to x: " + data.playerLocation.x.ToString() + ", y: " + data.playerLocation.y.ToString() + ", Player level to: " + data.playerLvl.ToString());
     }
@@ -56,19 +69,46 @@ public class PlayerData : MonoBehaviour, IDataPersistence
     public void CheckLevelingSystem()
     {
         //Check to see if the player has leveled up
-        if (playerExp >= playerExpReq)
+        if (playerExp >= playerExpMax)
         {
             if (playerLevel != playerMaxLvl)
             {
-                playerExp = playerExp - playerExpReq;
+                playerExp = playerExp - playerExpMax;
                 playerSP++;
                 playerLevel++;
-                playerExpReq += 50;
+                playerExpMax += 50;
             }
             else
             {
-                playerExp = playerExpReq;
+                playerExp = playerExpMax;
             }
+        }
+    }
+    public void CheckHPStatus()
+    {
+        //Check to see if player's HP is higher than 0
+        if (playerHealth <= 0)
+        {
+            playerHealth = 0;
+           // PlayerHealthHUD.GetComponent<TextMeshProUGUI>(HealthBarText) = ("HP: " + playerHealth.ToString() + " / " + playerMaxHealth.ToString());
+        }
+        //Check to see if player's HP is higher than allowed
+        if (playerHealth > playerMaxHealth)
+        {
+            playerHealth = playerMaxHealth;
+        }
+    }
+    public void CheckMPStatus()
+    {
+        //Check to see if player's MP is higher than 0
+        if (playerHealth <= 0)
+        {
+            playerHealth = 0;
+        }
+        //Check to see if player's MP is higher than allowed
+        if (playerHealth > playerMaxHealth)
+        {
+            playerHealth = playerMaxHealth;
         }
     }
     void Start()
