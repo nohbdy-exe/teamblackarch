@@ -10,12 +10,12 @@ public class GameMenuLauncher : MonoBehaviour
     public bool isPaused = false;
     public GameObject pauseMenuUI;
     public GameObject optionMenuUI;
+    public SceneController sceneController;
     public float mySfxVolume=1;
     public float myMusicVolume=1;
     // Start is called before the first frame update
     void Start()
     {
-       
     }
 
     // Update is called once per frame
@@ -47,6 +47,7 @@ public class GameMenuLauncher : MonoBehaviour
 
         Time.timeScale = 0;
         pauseMenuUI.SetActive(true);
+        sceneController.gameObject.SetActive(false);
 
     }
     public void Resume()
@@ -54,6 +55,7 @@ public class GameMenuLauncher : MonoBehaviour
 
         Time.timeScale = 1;
         pauseMenuUI.SetActive(false);
+        sceneController.gameObject.SetActive(true);
 
     }
    
