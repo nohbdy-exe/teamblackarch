@@ -12,9 +12,6 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] Dialog dialog;
     public AudioSource audioSource;
-    public OptionsMenuScript OptionSettings;
-    GameMenuLauncher gameMenuLauncher;
-    PlayerData playerData;
     
     // Start is called before the first frame update
     void Start()

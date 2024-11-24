@@ -6,9 +6,17 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
 
-    [SerializeField] Animator sceneTransition;
+
+    // This is supposed to be a scene manager, however, for demo sake I will simply teleport
+    // the player to another position. This can dynamically transition from scene to scene however.
+
+    [SerializeField] private AudioSource doorOpen;
+    [SerializeField] private AudioSource doorClose;
+    public Animator sceneTransition;
     public static SceneController instance;
-    [SerializeField] Player_Movement player;
+    public Player_Movement player;
+    private Vector2 StorePlayerLocation = Vector2.zero;
+    //private GameData gameData = new GameData();
 
     // Start is called before the first frame update
     void Awake()
@@ -24,32 +32,23 @@ public class SceneController : MonoBehaviour
 
     public void Start()
     {
-        this.gameObject.SetActive(true);
+
     }
 
-    public void NextScene() {
+    public void EnterExitHouse(Vector2 pos) {
+        StorePlayerLocation = pos;
+        doorOpen.Play();
         StartCoroutine(LoadNextScene());
-        player.transform.position = Vector2.zero;
-    }
-
-    public void PreviousScene() {
-        StartCoroutine(LoadPreviousScene());
-        //player.transform.position = new Vector2((float)25.1, (float)29.74);
     }
 
     // credit to rehope games for this coroutine.
     IEnumerator LoadNextScene() {
         sceneTransition.SetTrigger("End");
         yield return new WaitForSeconds(1);
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex+1);
+        //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex+1);
+        player.transform.position = StorePlayerLocation;
         sceneTransition.SetTrigger("Start");
-    }
-
-    IEnumerator LoadPreviousScene() {
-        sceneTransition.SetTrigger("End");
-        yield return new WaitForSeconds(1);
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex-1);
-        sceneTransition.SetTrigger("Start");
+        doorClose.Play();
     }
 
 }

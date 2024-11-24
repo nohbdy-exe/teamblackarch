@@ -16,6 +16,7 @@ public class GameMenuLauncher : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        sceneController.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
