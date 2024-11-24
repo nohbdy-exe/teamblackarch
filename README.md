@@ -4,6 +4,9 @@ for cs478
 
 This is our 2d RPG made in Unity.
 
+![Unity_lskN2saZlf](https://github.com/user-attachments/assets/9dcb707e-8b00-40c4-9540-cc08c326793d)
+
+
 # Created by:
 ### Luke B - Team Lead and Programmer
 ### Blake D. - Design Lead and Programmer
