@@ -9,6 +9,7 @@ public class GameMenuLauncher : MonoBehaviour
 {
     public bool isPaused = false;
     public GameObject pauseMenuUI;
+    public GameObject playerHUD;
     public GameObject optionMenuUI;
     public SceneController sceneController;
     public float mySfxVolume=1;
@@ -48,6 +49,7 @@ public class GameMenuLauncher : MonoBehaviour
 
         Time.timeScale = 0;
         pauseMenuUI.SetActive(true);
+        playerHUD.SetActive(false);
         sceneController.gameObject.SetActive(false);
 
     }
@@ -56,6 +58,7 @@ public class GameMenuLauncher : MonoBehaviour
 
         Time.timeScale = 1;
         pauseMenuUI.SetActive(false);
+        playerHUD.SetActive(true);
         sceneController.gameObject.SetActive(true);
 
     }
