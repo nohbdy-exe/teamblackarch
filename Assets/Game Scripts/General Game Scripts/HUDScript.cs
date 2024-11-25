@@ -24,8 +24,8 @@ public class HUDScript : MonoBehaviour
 
     public void UpdateHUDInfo()
     {
-        playerHealthText.text = ("HP: " + playerdata.playerHealth + " / " + playerdata.playerMaxHealth);
-        playerManaText.text = ("MP: " + playerdata.playerMana + " / " + playerdata.playerMaxMana);
+        playerHealthText.text = (playerdata.playerHealth + " / " + playerdata.playerMaxHealth);
+        playerManaText.text = (playerdata.playerMana + " / " + playerdata.playerMaxMana);
         playerExpText.text = ("XP: " + playerdata.playerExp + " / " + playerdata.playerExpMax);
         playerLevelText.text = (": " + playerdata.playerLevel);
         playerSkillPointsText.text = (": " + playerdata.playerSP);

@@ -116,7 +116,5 @@ public class PlayerData : MonoBehaviour, IDataPersistence
     void Start()
     {
         this.SetDataToLoad();
-        
-
     }
 }
