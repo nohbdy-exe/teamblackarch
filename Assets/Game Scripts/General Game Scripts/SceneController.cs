@@ -43,13 +43,13 @@ public class SceneController : MonoBehaviour
         doorOpen.Play();
         StartCoroutine(LoadHouse());
     }
+
     public void EnterCustomScene(string sceneName)
     {
         StartCoroutine(LoadSpecificScene(sceneName));
     }
-    // credit to rehope games for this coroutine.
-    IEnumerator LoadHouse()
-    {
+
+    IEnumerator LoadHouse() {
         sceneTransition.SetTrigger("End");
         yield return new WaitForSeconds(1);
         //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex+1);
