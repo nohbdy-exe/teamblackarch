@@ -32,23 +32,31 @@ public class SceneController : MonoBehaviour
 
     public void Start()
     {
-
+        gameObject.SetActive(true);
     }
 
     public void EnterExitHouse(Vector2 pos) {
         StorePlayerLocation = pos;
         doorOpen.Play();
-        StartCoroutine(LoadNextScene());
+        StartCoroutine(LoadHouse());
     }
 
     // credit to rehope games for this coroutine.
-    IEnumerator LoadNextScene() {
+    IEnumerator LoadHouse() {
         sceneTransition.SetTrigger("End");
         yield return new WaitForSeconds(1);
         //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex+1);
         player.transform.position = StorePlayerLocation;
         sceneTransition.SetTrigger("Start");
         doorClose.Play();
+    }
+
+    IEnumerator LoadSpecificScene(int sceneIndex)
+    {
+        sceneTransition.SetTrigger("End");
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadSceneAsync(sceneIndex);
+        sceneTransition.SetTrigger("Start");
     }
 
 }
