@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Level_1.unity
     guid: 94b00dcb70131f546ab4d8f3aa7585ab
   - enabled: 1
-    path: Assets/Scenes/Level_1_House.unity
-    guid: b4b5807e98330474bae65c0e6b9cbe37
+    path: Assets/Scenes/BattleScene.unity
+    guid: 48870f73ce827cb43b535c09e5ec2ab9
   m_configObjects: {}

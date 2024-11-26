@@ -60,11 +60,16 @@ public class PlayerData : MonoBehaviour, IDataPersistence
     {
         sceneNum = SceneManager.GetActiveScene().buildIndex;
         playerLoc = this.transform.position;
+        
         //Debug.Log("Attempting to save scene number saved to " + sceneNum.ToString() + ", Player location saving to x: " + playerLoc.x.ToString() + ", y: " + playerLoc.y.ToString() + ", Player level saving to: " + playerLevel.ToString());
 
     }
     public void SetDataToLoad()
     {
+        if (SceneManager.GetActiveScene().buildIndex != sceneNum)
+        {
+            SceneManager.LoadSceneAsync(sceneNum);
+        }
         this.transform.position = playerLoc;
         Debug.Log("Loaded data was set.");
     }
@@ -103,18 +108,24 @@ public class PlayerData : MonoBehaviour, IDataPersistence
     public void CheckMPStatus()
     {
         //Check to see if player's MP is higher than 0
-        if (playerHealth <= 0)
+        if (playerMana <= 0)
         {
-            playerHealth = 0;
+            playerMana = 0;
         }
         //Check to see if player's MP is higher than allowed
-        if (playerHealth > playerMaxHealth)
+        if (playerMana > playerMaxMana)
         {
-            playerHealth = playerMaxHealth;
+            playerMana = playerMaxMana;
         }
     }
     void Start()
     {
         this.SetDataToLoad();
+    }
+    void Update()
+    {
+        CheckHPStatus();
+        CheckLevelingSystem();
+        CheckMPStatus();
     }
 }
