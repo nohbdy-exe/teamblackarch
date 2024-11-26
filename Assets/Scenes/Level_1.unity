@@ -89651,7 +89651,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 9040d85ec341275498217afcf74d8fce, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.508
-  m_Pitch: 0.62
+  m_Pitch: 0.43
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -93306,7 +93306,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1752151150
 MonoBehaviour:
   m_ObjectHideFlags: 0
