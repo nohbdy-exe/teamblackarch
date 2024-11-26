@@ -12,7 +12,7 @@ public class PauseMenuScript : MonoBehaviour
     
     public GameMenuLauncher gameMenuLauncher; //= new GameMenuLauncher();
     public Color previousColor;
-    private bool saveAllowed = false;
+    private bool saveAllowed = true;
     public GameObject saveFailed;
     [SerializeField] private TextMeshProUGUI SaveGameButtonText;
     [Header("Pause Menu Buttons:")]
