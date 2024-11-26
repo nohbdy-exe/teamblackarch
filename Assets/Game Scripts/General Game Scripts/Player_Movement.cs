@@ -5,14 +5,13 @@ using System;
 
 public class Player_Movement : MonoBehaviour
 {
-    [SerializeField] protected float PlayerSpeed = 2f;
-    [SerializeField] protected int TimeDivider = 3;
-    Rigidbody2D rb;
-    Vector2 checkMovement;
-    [SerializeField] Animator animator;
-    [SerializeField] Dialog dialog;
+    [SerializeField] private float PlayerSpeed = 2f;
+    [SerializeField] private int TimeDivider = 3;
+    [SerializeField] private Animator animator;
+    [SerializeField] private Dialog dialog;
     public AudioSource audioSource;
-    
+    Rigidbody2D rb;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,12 +34,20 @@ public class Player_Movement : MonoBehaviour
     //Character Movement
     void PlayerMovement()
     {
+
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
+
         
-        if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) >0.1f) {
-            rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal")*PlayerSpeed,0);
+        if (Mathf.Abs(horizontalInput) > 0.1f) {
+            rb.velocity = new Vector2(horizontalInput * PlayerSpeed, 0);
         }
-        else {
-            rb.velocity = new Vector2(0,Input.GetAxisRaw("Vertical")*PlayerSpeed);
+        else if (Mathf.Abs(verticalInput) > 0.1f){
+            rb.velocity = new Vector2(0, verticalInput * PlayerSpeed);
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
         }
 
         if (Input.GetKeyDown(KeyCode.E)) {
@@ -48,33 +55,36 @@ public class Player_Movement : MonoBehaviour
         }
         
         // footstep sound
-        if (rb.velocity.magnitude > 0)
-        {
-            if (!audioSource.isPlaying)
-            {
-                audioSource.Play();
-            }
-        }
-        else
-        {
-            audioSource.Stop();
-        }
+        HandleFootstepSound();
 
     }
 
     void UpdateAnimation() {
         if (rb.velocity != Vector2.zero) {
-            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
-                this.GetComponent<SpriteRenderer>().flipX = true;
-            } else {
-                this.GetComponent<SpriteRenderer>().flipX = false;
-            }
             animator.SetBool("Walking", true);
             animator.SetFloat("Horizontal", rb.velocity.x);
             animator.SetFloat("Vertical",rb.velocity.y);
+
+            GetComponent<SpriteRenderer>().flipX = rb.velocity.x > 0;
         }
         else {
             animator.SetBool("Walking", false);
+        }
+    }
+
+    void HandleFootstepSound()
+    {
+        if (rb.velocity.magnitude > 0 && !audioSource.isPlaying)
+        {
+            audioSource.Play(); // Play sound when moving
+        }
+        else if (rb.velocity.magnitude == 0 && audioSource.isPlaying)
+        {
+            // Check if the audio is near the end of the clip (e.g., within 0.1 seconds)
+            if (audioSource.time >= audioSource.clip.length - 0.1f)
+            {
+                audioSource.Stop(); // Stop sound when it finishes playing
+            }
         }
     }
 
