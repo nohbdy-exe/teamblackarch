@@ -12,8 +12,14 @@ public class PauseMenuScript : MonoBehaviour
     
     public GameMenuLauncher gameMenuLauncher; //= new GameMenuLauncher();
     public Color previousColor;
+    private bool saveAllowed = true;
+    public GameObject saveFailed;
     [SerializeField] private TextMeshProUGUI SaveGameButtonText;
+    [Header("Pause Menu Buttons:")]
     [SerializeField] private Button SaveGameButton;
+    [SerializeField] private Button ResumeButton;
+    [SerializeField] private Button OptionsButton;
+    [SerializeField] private Button QuitButton;
     public void ResumeGame()
     {
         //Resumes Game
@@ -25,14 +31,41 @@ public class PauseMenuScript : MonoBehaviour
     {
         // Uses DataPersistanceManager to save game
         Debug.Log("Saving Game Information");
-        DataPersistenceManager.Instance.SaveGame();
-        Debug.Log("Data was saved.");
-        previousColor = SaveGameButton.image.color;
-        SaveGameButton.image.color = Color.green;
-        SaveGameButtonText.text = ("Saved");
-        IEnumerator waiter() { yield return new WaitForSecondsRealtime(1); SaveGameButton.image.color = previousColor; SaveGameButtonText.text = ("Game Saved"); SaveGameButtonText.text = ("Save"); }
-        StartCoroutine(waiter());
-        
+        if (saveAllowed)
+        {
+            DisablePauseMenuButtons();
+            DataPersistenceManager.Instance.SaveGame();
+            Debug.Log("Data was saved.");
+            previousColor = SaveGameButton.image.color;
+            SaveGameButton.image.color = Color.green;
+            SaveGameButtonText.text = ("Saved");
+            IEnumerator waiter() { yield return new WaitForSecondsRealtime(1); SaveGameButton.image.color = previousColor; SaveGameButtonText.text = ("Save"); EnablePauseMenuButtons(); }
+            StartCoroutine(waiter());
+
+        }
+        else
+        {
+            DisablePauseMenuButtons();
+            saveFailed.SetActive(true);
+            IEnumerator saveFailWaiter() { yield return new WaitForSecondsRealtime(2); saveFailed.SetActive(false); EnablePauseMenuButtons(); }
+            StartCoroutine (saveFailWaiter());
+        }
+    }
+
+    private void DisablePauseMenuButtons()
+    {
+        SaveGameButton.interactable = false;
+        ResumeButton.interactable = false;
+        OptionsButton.interactable = false;
+        QuitButton.interactable = false;
+    }
+
+    private void EnablePauseMenuButtons()
+    {
+        SaveGameButton.interactable = true;
+        ResumeButton.interactable = true;
+        OptionsButton.interactable = true;
+        QuitButton.interactable = true;
     }
 
     

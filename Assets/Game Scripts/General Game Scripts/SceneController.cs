@@ -21,11 +21,13 @@ public class SceneController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        if (instance == null) {
+        if (instance == null)
+        {
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else {
+        else
+        {
             Destroy(gameObject);
         }
     }
@@ -35,7 +37,8 @@ public class SceneController : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public void EnterExitHouse(Vector2 pos) {
+    public void EnterExitHouse(Vector2 pos)
+    {
         StorePlayerLocation = pos;
         doorOpen.Play();
         StartCoroutine(LoadHouse());
@@ -46,7 +49,6 @@ public class SceneController : MonoBehaviour
         StartCoroutine(LoadSpecificScene(sceneName));
     }
 
-    // credit to rehope games for this coroutine.
     IEnumerator LoadHouse() {
         sceneTransition.SetTrigger("End");
         yield return new WaitForSeconds(1);
