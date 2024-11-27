@@ -11,6 +11,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private Dialog dialog;
     public AudioSource audioSource;
     Rigidbody2D rb;
+    private bool playerIsPaused = false;
 
     // Start is called before the first frame update
     void Start()
@@ -60,32 +61,47 @@ public class Player_Movement : MonoBehaviour
     }
 
     void UpdateAnimation() {
-        if (rb.velocity != Vector2.zero) {
-            animator.SetBool("Walking", true);
-            animator.SetFloat("Horizontal", rb.velocity.x);
-            animator.SetFloat("Vertical",rb.velocity.y);
+        if (!playerIsPaused)
+        {
+            if (rb.velocity != Vector2.zero)
+            {
+                animator.SetBool("Walking", true);
+                animator.SetFloat("Horizontal", rb.velocity.x);
+                animator.SetFloat("Vertical", rb.velocity.y);
 
-            GetComponent<SpriteRenderer>().flipX = rb.velocity.x > 0;
+                GetComponent<SpriteRenderer>().flipX = rb.velocity.x > 0;
+            }
+            else
+            {
+                animator.SetBool("Walking", false);
+            }
         }
-        else {
-            animator.SetBool("Walking", false);
-        }
+        
     }
 
     void HandleFootstepSound()
     {
-        if (rb.velocity.magnitude > 0 && !audioSource.isPlaying)
+        if (!playerIsPaused)
         {
-            audioSource.Play(); // Play sound when moving
-        }
-        else if (rb.velocity.magnitude == 0 && audioSource.isPlaying)
-        {
-            // Check if the audio is near the end of the clip (e.g., within 0.1 seconds)
-            if (audioSource.time >= audioSource.clip.length - 0.1f)
+            if (rb.velocity.magnitude > 0 && !audioSource.isPlaying)
             {
-                audioSource.Stop(); // Stop sound when it finishes playing
+                audioSource.Play(); // Play sound when moving
+            }
+            else if (rb.velocity.magnitude == 0 && audioSource.isPlaying)
+            {
+                // Check if the audio is near the end of the clip (e.g., within 0.1 seconds)
+                if (audioSource.time >= audioSource.clip.length - 0.1f)
+                {
+                    audioSource.Stop(); // Stop sound when it finishes playing
+                }
             }
         }
+        
+    }
+
+    public void PausePlayerMovement()
+    {
+        this.playerIsPaused = !playerIsPaused;
     }
 
     void CallDialog() {

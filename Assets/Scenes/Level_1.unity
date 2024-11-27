@@ -88298,6 +88298,7 @@ MonoBehaviour:
   isPaused: 0
   pauseMenuUI: {fileID: 415068165}
   playerHUD: {fileID: 1244213263}
+  playerChar: {fileID: 823628571}
   optionMenuUI: {fileID: 992903462}
   sceneController: {fileID: 894255840}
   mySfxVolume: 1
