@@ -15,6 +15,7 @@ public class MainMenuScript : MonoBehaviour
     [SerializeField] private Button confirmYesGameBtn;
     [SerializeField] private Button confirmNoGameBtn;
     [SerializeField] private TextMeshProUGUI confirmText;
+    [SerializeField] private AudioSource audioConfirmSound;
 
     private void Start()
     {
@@ -54,6 +55,7 @@ public class MainMenuScript : MonoBehaviour
         else
         {    
             confirmPanel.gameObject.SetActive(true);
+            audioConfirmSound.Play();
         }
        
     }

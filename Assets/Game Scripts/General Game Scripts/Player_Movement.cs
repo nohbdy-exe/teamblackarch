@@ -11,6 +11,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private Dialog dialog;
     public AudioSource audioSource;
     Rigidbody2D rb;
+    public PlayerData playerData;
     private bool playerIsPaused = false;
     private bool isMovingHorizontal = false;
     private bool isMovingVertical = false;
@@ -28,11 +29,18 @@ public class Player_Movement : MonoBehaviour
     // Update is called once per frame
     public void PlayerUpdate()
     {
-        PlayerMovement();
+        if (!playerData.battleActive)
+        {
+            PlayerMovement();
+        }
         UpdateAnimation();
     }
 
-    
+
+    void playerAutoMovement()
+    {
+        //put players battlescene auto-movement here
+    }
 
     //Character Movement
     void PlayerMovement()

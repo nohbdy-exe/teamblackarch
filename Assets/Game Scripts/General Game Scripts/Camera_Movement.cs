@@ -26,6 +26,8 @@ public class Camera_Movement : MonoBehaviour
 
     private float originalSize = 0f;
 
+    public PlayerData playerData;
+
     private Camera thisCamera;
 
     // Start is called before the first frame update
@@ -51,7 +53,12 @@ public class Camera_Movement : MonoBehaviour
             targetSize, Time.deltaTime * zoomSpeed);
         }
         pauseTracker();
-        playerTracker();
+        
+        if (!playerData.battleActive)
+        {
+            playerTracker();
+        }
+
     }
 
      void playerTracker()
