@@ -11,64 +11,106 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private Dialog dialog;
     public AudioSource audioSource;
     Rigidbody2D rb;
+    public PlayerData playerData;
     private bool playerIsPaused = false;
+    private bool isMovingHorizontal = false;
+    private bool isMovingVertical = false;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        transform.localScale = new Vector2(3,3);
+        transform.localScale = new Vector2(3, 3);
         audioSource = GetComponent<AudioSource>();
-        
-        
+
+
     }
 
     // Update is called once per frame
     public void PlayerUpdate()
     {
-        PlayerMovement();
+        if (!playerData.battleActive)
+        {
+            PlayerMovement();
+        }
+        
         UpdateAnimation();
     }
 
-    
+
 
     //Character Movement
     void PlayerMovement()
     {
-       
+
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
-        
-        
-            
+
+
+        if (isMovingHorizontal)
+        {
             if (Mathf.Abs(horizontalInput) > 0.1f)
             {
-                rb.velocity = new Vector2(horizontalInput,verticalInput)* PlayerSpeed;
-               
-                
+                rb.velocity = new Vector2(horizontalInput * PlayerSpeed, 0);
             }
+            else
+            {
+                rb.velocity = Vector2.zero;
+                isMovingHorizontal = false;
+            }
+        }
 
+        else if (isMovingVertical)
+        {
             if (Mathf.Abs(verticalInput) > 0.1f)
             {
-                rb.velocity = new Vector2(horizontalInput, verticalInput) * PlayerSpeed;
-                
+                rb.velocity = new Vector2(0, verticalInput * PlayerSpeed);
             }
-            
-            
-        
+            else
+            {
+                rb.velocity = Vector2.zero;
+                isMovingVertical = false;
+            }
+        }
 
-       
+        else
+        {
+            if (Mathf.Abs(horizontalInput) > 0.1f && Mathf.Abs(verticalInput) <= 0.1f)
+            {
 
-        if (Input.GetKeyDown(KeyCode.E)) {
+                rb.velocity = new Vector2(horizontalInput * PlayerSpeed, 0);
+                isMovingHorizontal = true;
+            }
+            else if (Mathf.Abs(verticalInput) > 0.1f && Mathf.Abs(horizontalInput) <= 0.1f)
+            {
+
+                rb.velocity = new Vector2(0, verticalInput * PlayerSpeed);
+                isMovingVertical = true;
+            }
+            else
+            {
+                rb.velocity = Vector2.zero;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && rb.velocity == Vector2.zero)
+        {
             CallDialog();
         }
-        
+
+
         // footstep sound
         HandleFootstepSound();
 
     }
 
-    void UpdateAnimation() {
+    void playerAutoMovement()
+    {
+        //put players battlescene auto-movement here
+    }
+
+    void UpdateAnimation()
+    {
         if (!playerIsPaused)
         {
             if (rb.velocity != Vector2.zero)
@@ -84,7 +126,7 @@ public class Player_Movement : MonoBehaviour
                 animator.SetBool("Walking", false);
             }
         }
-        
+
     }
 
     void HandleFootstepSound()
@@ -104,7 +146,7 @@ public class Player_Movement : MonoBehaviour
                 }
             }
         }
-        
+
     }
 
     public void PausePlayerMovement()
@@ -112,7 +154,8 @@ public class Player_Movement : MonoBehaviour
         this.playerIsPaused = !playerIsPaused;
     }
 
-    void CallDialog() {
+    void CallDialog()
+    {
         StartCoroutine(DialogManager.Instance.ShowDialog(dialog));
     }
 }

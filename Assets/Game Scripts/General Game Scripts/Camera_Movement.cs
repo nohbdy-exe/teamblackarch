@@ -19,6 +19,7 @@ public class Camera_Movement : MonoBehaviour
     protected float zoomFactor = 0f;
     protected bool movementKeysEnabled = true;
     public GameMenuLauncher gameMenu;
+    public PlayerData playerData;
     [SerializeField]
     protected float zoomSpeed = 2.0f;
 
@@ -51,7 +52,12 @@ public class Camera_Movement : MonoBehaviour
             targetSize, Time.deltaTime * zoomSpeed);
         }
         pauseTracker();
-        playerTracker();
+        
+        if (!playerData.battleActive)
+        {
+            playerTracker();
+        }
+        
     }
 
      void playerTracker()
