@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c07b085ae67cb429ca7c4e78ebe646, type: 3}
+  m_Name: npcDialog
+  m_EditorClassIdentifier: 
+  dLines:
+  - What are you doing in here?
+  - 'Surely you can find better things to do with your time. '
+  - Actually something has come to my attention, somebody may need your help.
+  - Chances are you've seen that villager frantically roaming around the island.
+  - I passed him this afternoon and he mentioned there was something dangerous in
+    the area.
+  - He could be hallucinating for all I know. However, desolate times often bring
+    out the worst in people. Be prepared.

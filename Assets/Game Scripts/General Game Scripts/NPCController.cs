@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class NPCController : MonoBehaviour
 {
+    [SerializeField] Dialog dialog;
     private bool isPlayerInRange = false;
 
     void Update()
@@ -11,7 +12,7 @@ public class NPCController : MonoBehaviour
         // Check if player is in range and presses a key to interact
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
         {
-            Interact();
+            TriggerNPCDialog();
         }
     }
 
@@ -32,9 +33,15 @@ public class NPCController : MonoBehaviour
         }
     }
 
-    private void Interact()
+    private void TriggerNPCDialog()
     {
-        Debug.Log("Interacting with NPC");
-        // Trigger dialogue, play sound, or run any other interaction logic here
+        /*if (npcDialog == null || npcDialog.dialogLines == null || npcDialog.dialogLines.Count == 0)
+        {
+            Debug.LogError("NPC dialog is null or improperly configured");
+            return;
+        } */
+        Debug.Log("NPC dialog triggered");
+        Player_Movement playerMovement = FindObjectOfType<Player_Movement>();
+        playerMovement.TriggerDialog(dialog);
     }
 }
