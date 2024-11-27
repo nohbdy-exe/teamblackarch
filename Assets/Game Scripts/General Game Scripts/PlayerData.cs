@@ -80,10 +80,12 @@ public class PlayerData : MonoBehaviour, IDataPersistence
             if (SceneManager.GetActiveScene().buildIndex != sceneNum)
             {
                 SceneManager.LoadSceneAsync(sceneNum);
-                this.transform.position = playerLoc;
+                
             }
         }
-        
+
+        this.transform.position = playerLoc;
+
         Debug.Log("Loaded data was set.");
     }
     public void CheckLevelingSystem()

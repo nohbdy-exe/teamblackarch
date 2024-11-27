@@ -11,7 +11,7 @@ public class OptionsMenuScript : MonoBehaviour
 {
     [SerializeField] private AudioSource doorOpen;
     [SerializeField] private AudioSource doorClose;
-    [SerializeField] private Player_Movement playerMovement;
+    [SerializeField] private RandomSoundsScript walkingNoises;
     public bool musicMuted = false;
     public bool sfxMuted = false;
     public float musicVolume=1;
@@ -73,7 +73,7 @@ public class OptionsMenuScript : MonoBehaviour
             sfxSlider.value = 0;
             btnSFX.image.sprite = VolumeMute;
         }
-        playerMovement.audioSource.volume = sfxVolume;
+        walkingNoises.randomSound.volume = sfxVolume;
         doorOpen.volume = sfxVolume;
         doorClose.volume = sfxVolume;
     }
@@ -107,7 +107,7 @@ public class OptionsMenuScript : MonoBehaviour
             btnSFX.image.sprite = VolumeMute;
             sfxMuted = true;
         }
-        playerMovement.audioSource.volume = sfxVolume;
+        walkingNoises.randomSound.volume = sfxVolume;
         doorOpen.volume = sfxVolume;
         doorClose.volume = sfxVolume;
     }

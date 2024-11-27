@@ -9,7 +9,6 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private int TimeDivider = 3;
     [SerializeField] private Animator animator;
     [SerializeField] private Dialog dialog;
-    public AudioSource audioSource;
     Rigidbody2D rb;
     public PlayerData playerData;
     private bool playerIsPaused = false;
@@ -21,8 +20,6 @@ public class Player_Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         transform.localScale = new Vector2(3,3);
-        audioSource = GetComponent<AudioSource>();
-        
         
     }
 
@@ -100,10 +97,6 @@ public class Player_Movement : MonoBehaviour
             CallDialog();
         }
 
-
-        // footstep sound
-        HandleFootstepSound();
-
     }
 
     void UpdateAnimation() {
@@ -125,25 +118,6 @@ public class Player_Movement : MonoBehaviour
         
     }
 
-    void HandleFootstepSound()
-    {
-        if (!playerIsPaused)
-        {
-            if (rb.velocity.magnitude > 0 && !audioSource.isPlaying)
-            {
-                audioSource.Play(); // Play sound when moving
-            }
-            else if (rb.velocity.magnitude == 0 && audioSource.isPlaying)
-            {
-                // Check if the audio is near the end of the clip (e.g., within 0.1 seconds)
-                if (audioSource.time >= audioSource.clip.length - 0.1f)
-                {
-                    audioSource.Stop(); // Stop sound when it finishes playing
-                }
-            }
-        }
-        
-    }
 
     public void PausePlayerMovement()
     {
