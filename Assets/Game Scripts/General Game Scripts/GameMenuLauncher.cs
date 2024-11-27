@@ -9,6 +9,7 @@ public class GameMenuLauncher : MonoBehaviour
     public bool isPaused = false;
     public GameObject pauseMenuUI;
     public GameObject playerHUD;
+    public Player_Movement playerChar;
     public GameObject optionMenuUI;
     public SceneController sceneController;
     public float mySfxVolume=1;
@@ -36,7 +37,7 @@ public class GameMenuLauncher : MonoBehaviour
                 Pause();
 
             }
-            else if (isPaused == true)
+            else if (isPaused == true && optionMenuUI.activeSelf == false)
             {
                 isPaused = false;
                 Resume();
@@ -49,6 +50,7 @@ public class GameMenuLauncher : MonoBehaviour
         Time.timeScale = 0;
         pauseMenuUI.SetActive(true);
         playerHUD.SetActive(false);
+        playerChar.PausePlayerMovement();
 
     }
     public void Resume()
@@ -57,6 +59,7 @@ public class GameMenuLauncher : MonoBehaviour
         Time.timeScale = 1;
         pauseMenuUI.SetActive(false);
         playerHUD.SetActive(true);
+        playerChar.PausePlayerMovement();
 
     }
    

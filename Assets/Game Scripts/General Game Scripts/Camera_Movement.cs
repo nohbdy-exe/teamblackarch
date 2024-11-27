@@ -22,6 +22,8 @@ public class Camera_Movement : MonoBehaviour
     [SerializeField]
     protected float zoomSpeed = 2.0f;
 
+    private bool alreadyMoving = false;
+
     private float originalSize = 0f;
 
     private Camera thisCamera;
@@ -56,53 +58,39 @@ public class Camera_Movement : MonoBehaviour
     {
         //Setting Inputs
         //slowly animates camera movement for smoother transition
-        if (movementKeysEnabled==true)
+        if (movementKeysEnabled == true && alreadyMoving == false)
         {
-            if (Input.GetKey("w"))
+            if (Input.GetKey("w") || Input.GetKey(KeyCode.UpArrow))
             {
                 SetZoom(1f);
                 yOffset = 1.05f;
+                alreadyMoving = true;
             }
-            if (Input.GetKey(KeyCode.UpArrow))
-            {
-                SetZoom(1f);
-                yOffset = 1.05f;
-            }
-            if (Input.GetKey("s"))
+            if (Input.GetKey("s") || Input.GetKey(KeyCode.DownArrow))
             {
                 SetZoom(1f);
                 yOffset = .95f;
+                alreadyMoving = true;
             }
-            if (Input.GetKey(KeyCode.DownArrow))
-            {
-                SetZoom(1f);
-                yOffset = .95f;
-            }
-            if (Input.GetKey("a"))
+            if (Input.GetKey("a") || Input.GetKey(KeyCode.LeftArrow))
             {
                 SetZoom(1f);
                 xOffset = -.05f;
+                alreadyMoving = true;
             }
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                SetZoom(1f);
-                xOffset = -.05f;
-            }
-            if (Input.GetKey("d"))
+
+            if (Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow))
             {
                 SetZoom(1f);
                 xOffset = .05f;
-            }
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                SetZoom(1f);
-                xOffset = .05f;
+                alreadyMoving = true;
             }
             if (!Input.anyKey)
             {
                 SetZoom(0.98f);
                 xOffset = 0;
                 yOffset = 1;
+                alreadyMoving = false;
             }
         }
         else
