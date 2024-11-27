@@ -44,9 +44,23 @@ public class SceneController : MonoBehaviour
         StartCoroutine(LoadHouse());
     }
 
+    public void EnterExitCave(Vector2 pos)
+    {
+        StorePlayerLocation = pos;
+        StartCoroutine(LoadCaves());
+    }
+
     public void EnterCustomScene(string sceneName)
     {
         StartCoroutine(LoadSpecificScene(sceneName));
+    }
+
+    IEnumerator LoadCaves()
+    {
+        sceneTransition.SetTrigger("End");
+        yield return new WaitForSeconds(1);
+        player.transform.position = StorePlayerLocation;
+        sceneTransition.SetTrigger("Start");
     }
 
     IEnumerator LoadHouse() {
