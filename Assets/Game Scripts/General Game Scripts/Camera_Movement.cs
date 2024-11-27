@@ -92,6 +92,7 @@ public class Camera_Movement : MonoBehaviour
                 yOffset = 1;
                 alreadyMoving = false;
             }
+
         }
         else
         {

@@ -12,6 +12,8 @@ public class Player_Movement : MonoBehaviour
     public AudioSource audioSource;
     Rigidbody2D rb;
     private bool playerIsPaused = false;
+    private bool isMovingHorizontal = false;
+    private bool isMovingVertical = false;
 
     // Start is called before the first frame update
     void Start()
@@ -40,21 +42,57 @@ public class Player_Movement : MonoBehaviour
         float verticalInput = Input.GetAxisRaw("Vertical");
 
         
-        if (Mathf.Abs(horizontalInput) > 0.1f) {
-            rb.velocity = new Vector2(horizontalInput * PlayerSpeed, 0);
-        }
-        else if (Mathf.Abs(verticalInput) > 0.1f){
-            rb.velocity = new Vector2(0, verticalInput * PlayerSpeed);
-        }
-        else
+        if (isMovingHorizontal)
         {
-            rb.velocity = Vector2.zero;
-        }
-
-        if (Input.GetKeyDown(KeyCode.E)) {
-            CallDialog();
+            if (Mathf.Abs(horizontalInput) > 0.1f) { 
+                rb.velocity = new Vector2(horizontalInput * PlayerSpeed, 0);
+            }
+            else 
+            {
+                rb.velocity = Vector2.zero;
+                isMovingHorizontal = false;
+            }
         }
         
+        else if (isMovingVertical)
+        {
+            if (Mathf.Abs(verticalInput) > 0.1f)
+            {
+                rb.velocity = new Vector2(0, verticalInput * PlayerSpeed);
+            }
+            else
+            {
+                rb.velocity = Vector2.zero;
+                isMovingVertical = false;
+            }
+        }
+
+        else
+        {    
+            if (Mathf.Abs(horizontalInput) > 0.1f && Mathf.Abs(verticalInput) <= 0.1f)
+            {
+               
+                rb.velocity = new Vector2(horizontalInput * PlayerSpeed, 0);
+                isMovingHorizontal = true;
+            }
+            else if (Mathf.Abs(verticalInput) > 0.1f && Mathf.Abs(horizontalInput) <= 0.1f)
+            {
+               
+                rb.velocity = new Vector2(0, verticalInput * PlayerSpeed);
+                isMovingVertical = true;
+            }
+            else
+            {
+                rb.velocity = Vector2.zero;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && rb.velocity == Vector2.zero)
+        {
+            CallDialog();
+        }
+
+
         // footstep sound
         HandleFootstepSound();
 
