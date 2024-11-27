@@ -35,21 +35,29 @@ public class Player_Movement : MonoBehaviour
     //Character Movement
     void PlayerMovement()
     {
-
+       
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
-
         
-        if (Mathf.Abs(horizontalInput) > 0.1f) {
-            rb.velocity = new Vector2(horizontalInput * PlayerSpeed, 0);
-        }
-        else if (Mathf.Abs(verticalInput) > 0.1f){
-            rb.velocity = new Vector2(0, verticalInput * PlayerSpeed);
-        }
-        else
-        {
-            rb.velocity = Vector2.zero;
-        }
+        
+            
+            if (Mathf.Abs(horizontalInput) > 0.1f)
+            {
+                rb.velocity = new Vector2(horizontalInput,verticalInput)* PlayerSpeed;
+               
+                
+            }
+
+            if (Mathf.Abs(verticalInput) > 0.1f)
+            {
+                rb.velocity = new Vector2(horizontalInput, verticalInput) * PlayerSpeed;
+                
+            }
+            
+            
+        
+
+       
 
         if (Input.GetKeyDown(KeyCode.E)) {
             CallDialog();
