@@ -18,6 +18,7 @@ public class PlayerData : MonoBehaviour, IDataPersistence
     public float playerMaxMana = 100;
     public float playerMaxHealth = 100;
     public bool battleActive = false;
+    
     /*
     [Header("Player HUD Info:")]
     [SerializeField] public GameObject PlayerLevelHUD;
@@ -67,15 +68,15 @@ public class PlayerData : MonoBehaviour, IDataPersistence
     }
     public void SetDataToLoad()
     {
-        if (battleActive)
+        /*if (battleActive)
         {
-            if (SceneManager.GetActiveScene().ToString() != "BattleScene")
+            if (SceneManager.GetActiveScene().name != "BattleScene")
             {
-                SceneManager.LoadSceneAsync("BattleScene");
+                SceneManager.LoadScene("BattleScene");
             }
         }
-
-        if (!battleActive)
+        */
+        if (battleActive==false)
         {
             if (SceneManager.GetActiveScene().buildIndex != sceneNum)
             {
@@ -83,9 +84,16 @@ public class PlayerData : MonoBehaviour, IDataPersistence
                 
             }
         }
+<<<<<<< Updated upstream
 
         this.transform.position = playerLoc;
 
+=======
+        
+
+        
+        
+>>>>>>> Stashed changes
         Debug.Log("Loaded data was set.");
     }
     public void CheckLevelingSystem()
@@ -133,10 +141,25 @@ public class PlayerData : MonoBehaviour, IDataPersistence
             playerMana = playerMaxMana;
         }
     }
+    private void SetPlayerToBattle()
+    {
+        
+    }
+
     void Start()
     {
-        this.SetDataToLoad();
+        if (SceneManager.GetActiveScene().name == "BattleScene")
+        {
+            battleActive = true;
+            SetPlayerToBattle();
+        }
+        else
+        {
+            this.SetDataToLoad();
+        }
+        
     }
+   
     void Update()
     {
         CheckHPStatus();
