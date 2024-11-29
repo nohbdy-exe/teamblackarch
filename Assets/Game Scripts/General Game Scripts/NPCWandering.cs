@@ -12,6 +12,7 @@ public class NPCWandering : MonoBehaviour
     [SerializeField] private Animator npcAnim;
     [SerializeField] private Dialog npcDialog;
     [SerializeField] private string npcCharacterName;
+    [SerializeField] private SpriteRenderer npcSpriteRenderer;
     public Player_Movement player;
     private int currentWaypointIndex = 0;
     private bool isMovingForward = true;
@@ -23,6 +24,7 @@ public class NPCWandering : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.bodyType = RigidbodyType2D.Kinematic;
         if (waypoints.Length > 0)
         {
             StartCoroutine(NPCWander());
@@ -37,11 +39,24 @@ public class NPCWandering : MonoBehaviour
     void Update()
     {
         UpdateAnimation();
+        CheckOrderLayer();
 
         if (playerInRange && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("Player pressed E");
             StartCoroutine(HandleDialog());
+        }
+    }
+
+    void CheckOrderLayer()
+    {
+        if (player.transform.position.y > transform.position.y)
+        {
+            npcSpriteRenderer.sortingOrder = 1;
+        }
+        else
+        {
+            npcSpriteRenderer.sortingOrder = -1;
         }
     }
 
@@ -66,7 +81,7 @@ public class NPCWandering : MonoBehaviour
         Debug.Log("Dialog ended, resuming NPC wandering.");
         rb.velocity = Vector2.zero;
         DialogManager.Instance.ShowDialog(npcDialog, npcCharacterName);
-        yield return StartCoroutine(NPCWander());
+        yield return null;
     }
 
     private IEnumerator NPCWander()
