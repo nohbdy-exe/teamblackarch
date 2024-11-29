@@ -8,7 +8,6 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private float PlayerSpeed = 2f;
     [SerializeField] private int TimeDivider = 3;
     [SerializeField] private Animator animator;
-    [SerializeField] private Dialog dialog;
     Rigidbody2D rb;
     public PlayerData playerData;
     private bool playerIsPaused = false;
@@ -39,26 +38,33 @@ public class Player_Movement : MonoBehaviour
         //put players battlescene auto-movement here
     }
 
+    public bool PlayerIsMoving()
+    {
+        if (isMovingHorizontal || isMovingVertical) { return true; } else { return false; }
+    }
+
     //Character Movement
     void PlayerMovement()
     {
 
+        // checks to make sure we are not pressing more than one input at once.
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
 
-        
+
         if (isMovingHorizontal)
         {
-            if (Mathf.Abs(horizontalInput) > 0.1f) { 
+            if (Mathf.Abs(horizontalInput) > 0.1f)
+            {
                 rb.velocity = new Vector2(horizontalInput * PlayerSpeed, 0);
             }
-            else 
+            else
             {
                 rb.velocity = Vector2.zero;
                 isMovingHorizontal = false;
             }
         }
-        
+
         else if (isMovingVertical)
         {
             if (Mathf.Abs(verticalInput) > 0.1f)
@@ -73,16 +79,16 @@ public class Player_Movement : MonoBehaviour
         }
 
         else
-        {    
+        {
             if (Mathf.Abs(horizontalInput) > 0.1f && Mathf.Abs(verticalInput) <= 0.1f)
             {
-               
+
                 rb.velocity = new Vector2(horizontalInput * PlayerSpeed, 0);
                 isMovingHorizontal = true;
             }
             else if (Mathf.Abs(verticalInput) > 0.1f && Mathf.Abs(horizontalInput) <= 0.1f)
             {
-               
+
                 rb.velocity = new Vector2(0, verticalInput * PlayerSpeed);
                 isMovingVertical = true;
             }
@@ -91,13 +97,9 @@ public class Player_Movement : MonoBehaviour
                 rb.velocity = Vector2.zero;
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.E) && rb.velocity == Vector2.zero)
-        {
-            CallDialog();
-        }
-
     }
+
+
 
     void UpdateAnimation() {
         if (!playerIsPaused)
@@ -124,7 +126,4 @@ public class Player_Movement : MonoBehaviour
         this.playerIsPaused = !playerIsPaused;
     }
 
-    void CallDialog() {
-        StartCoroutine(DialogManager.Instance.ShowDialog(dialog));
-    }
 }

@@ -8,6 +8,7 @@ public class DialogManager : MonoBehaviour
 {
     [SerializeField] GameObject dialogBox;
     [SerializeField] Text dialogText;
+    [SerializeField] Text dialogCharName;
     [SerializeField] int typeSpeed;
 
     Dialog dialog;
@@ -43,12 +44,14 @@ public class DialogManager : MonoBehaviour
 
 
     // ShowDialog function to be called by other classes
-    public IEnumerator ShowDialog(Dialog dialog) {
+    public IEnumerator ShowDialog(Dialog dialog, string charName) {
         yield return new WaitForEndOfFrame();
         OnShowDialog?.Invoke(); // OnShowDialog event
         this.dialog = dialog;
         dialogBox.SetActive(true);
-        StartCoroutine(TypeDialog(dialog.dialogLines[0]));
+        dialogCharName.text = charName;
+        string dialogText = dialog.dialogLines[0];
+        StartCoroutine(TypeDialog(dialogText));
     }
 
     // coroutine to run through dialog lines by letter
