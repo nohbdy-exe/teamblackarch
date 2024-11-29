@@ -25,17 +25,8 @@ public class Player_Movement : MonoBehaviour
     // Update is called once per frame
     public void PlayerUpdate()
     {
-        if (!playerData.battleActive)
-        {
-            PlayerMovement();
-        }
+        PlayerMovement();
         UpdateAnimation();
-    }
-
-
-    void playerAutoMovement()
-    {
-        //put players battlescene auto-movement here
     }
 
     public bool PlayerIsMoving()
@@ -44,7 +35,7 @@ public class Player_Movement : MonoBehaviour
     }
 
     //Character Movement
-    void PlayerMovement()
+    public void PlayerMovement()
     {
 
         // checks to make sure we are not pressing more than one input at once.
@@ -99,9 +90,7 @@ public class Player_Movement : MonoBehaviour
         }
     }
 
-
-
-    void UpdateAnimation() {
+    public void UpdateAnimation() {
         if (!playerIsPaused)
         {
             if (rb.velocity != Vector2.zero)

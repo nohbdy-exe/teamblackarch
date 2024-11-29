@@ -50,8 +50,7 @@ public class DialogManager : MonoBehaviour
         this.dialog = dialog;
         dialogBox.SetActive(true);
         dialogCharName.text = charName;
-        string dialogText = dialog.dialogLines[0];
-        StartCoroutine(TypeDialog(dialogText));
+        StartCoroutine(TypeDialog(dialog.dialogLines[0]));
     }
 
     // coroutine to run through dialog lines by letter

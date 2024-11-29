@@ -63,10 +63,10 @@ public class NPCWandering : MonoBehaviour
 
     private IEnumerator HandleDialog()
     {
+        Debug.Log("Dialog ended, resuming NPC wandering.");
         rb.velocity = Vector2.zero;
         DialogManager.Instance.ShowDialog(npcDialog, npcCharacterName);
-        yield return new WaitForEndOfFrame();
-        StartCoroutine(NPCWander());
+        yield return StartCoroutine(NPCWander());
     }
 
     private IEnumerator NPCWander()
