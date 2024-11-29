@@ -285,7 +285,6 @@ MonoBehaviour:
     - Hey there this is a dialog test.
     - Blake is epic
     - Ethan is awesome
-  audioSource: {fileID: 7307789}
   playerData: {fileID: 7307788}
 --- !u!114 &7307788
 MonoBehaviour:
@@ -491,7 +490,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 0.25, y: 0.5}
+    oldSize: {x: 0.25, y: 0.515625}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
