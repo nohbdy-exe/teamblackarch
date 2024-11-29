@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using static UnityEngine.GraphicsBuffer;
-using UnityEngine.Rendering;
 
 public class Player_Movement : MonoBehaviour
 {
@@ -36,7 +34,10 @@ public class Player_Movement : MonoBehaviour
     }
 
 
-    
+    void playerAutoMovement()
+    {
+        //put players battlescene auto-movement here
+    }
 
     //Character Movement
     void PlayerMovement()
@@ -98,7 +99,7 @@ public class Player_Movement : MonoBehaviour
 
     }
 
-    public void UpdateAnimation() {
+    void UpdateAnimation() {
         if (!playerIsPaused)
         {
             if (rb.velocity != Vector2.zero)
