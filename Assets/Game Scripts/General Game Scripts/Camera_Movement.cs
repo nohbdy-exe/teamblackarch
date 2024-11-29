@@ -53,11 +53,7 @@ public class Camera_Movement : MonoBehaviour
             targetSize, Time.deltaTime * zoomSpeed);
         }
         pauseTracker();
-        
-        if (!playerData.battleActive)
-        {
-            playerTracker();
-        }
+        playerTracker();
 
     }
 

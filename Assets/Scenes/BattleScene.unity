@@ -242,11 +242,6 @@ MonoBehaviour:
   PlayerSpeed: 3.5
   TimeDivider: 3
   animator: {fileID: 7307790}
-  dialog:
-    dLines:
-    - Hey there this is a dialog test.
-    - Blake is epic
-    - Ethan is awesome
   playerData: {fileID: 7307788}
 --- !u!114 &7307788
 MonoBehaviour:
@@ -271,7 +266,7 @@ MonoBehaviour:
   playerMaxLvl: 5
   playerMaxMana: 100
   playerMaxHealth: 100
-  battleActive: 0
+  battleActive: 1
 --- !u!82 &7307789
 AudioSource:
   m_ObjectHideFlags: 0
@@ -950,7 +945,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &637010954
