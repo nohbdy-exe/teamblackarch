@@ -67,11 +67,18 @@ public class PlayerData : MonoBehaviour, IDataPersistence
     }
     public void SetDataToLoad()
     {
-        if (SceneManager.GetActiveScene().buildIndex != sceneNum)
+
+        if (battleActive == false)
         {
-            SceneManager.LoadSceneAsync(sceneNum);
+            if (SceneManager.GetActiveScene().buildIndex != sceneNum)
+            {
+                SceneManager.LoadSceneAsync(sceneNum);
+                this.transform.position = playerLoc;
+            }
         }
-        this.transform.position = playerLoc;
+
+
+
         Debug.Log("Loaded data was set.");
     }
     public void CheckLevelingSystem()
@@ -121,9 +128,18 @@ public class PlayerData : MonoBehaviour, IDataPersistence
     }
     void Start()
     {
-        this.SetDataToLoad();
-        
+
+        if (SceneManager.GetActiveScene().name == "BattleScene")
+        {
+            battleActive = true;
+
+        }
+        else
+        {
+            this.SetDataToLoad();
+        }
     }
+
     void Update()
     {
         CheckHPStatus();
