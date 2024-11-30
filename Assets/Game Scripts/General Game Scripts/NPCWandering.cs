@@ -17,7 +17,7 @@ public class NPCWandering : MonoBehaviour
     private int currentWaypointIndex = 0;
     private bool isMovingForward = true;
     private Rigidbody2D rb;
-    private bool playerInRange = false;
+    public bool playerInRange = false;
 
 
     // Start is called before the first frame update
@@ -50,7 +50,7 @@ public class NPCWandering : MonoBehaviour
 
     void CheckOrderLayer()
     {
-        if (player.transform.position.y > transform.position.y)
+        if (player.transform.position.y >= transform.position.y)
         {
             npcSpriteRenderer.sortingOrder = 1;
         }
@@ -116,7 +116,7 @@ public class NPCWandering : MonoBehaviour
 
     private IEnumerator MoveToWaypoint(Transform waypoint)
     {
-       float posThreshold = 0.1f;
+       float posThreshold = 0.05f;
 
        while (Vector2.Distance((Vector2)rb.position,(Vector2) waypoint.position)>posThreshold)
         {
@@ -138,7 +138,6 @@ public class NPCWandering : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player triggered");
             playerInRange = true;
         }
     }
