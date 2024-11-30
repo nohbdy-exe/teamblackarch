@@ -68,6 +68,7 @@ public class PlayerData : MonoBehaviour, IDataPersistence
     public void SetDataToLoad()
     {
 
+
         if (SceneManager.GetActiveScene().name != "BattleScene")
         {
             if (SceneManager.GetActiveScene().buildIndex != sceneNum)
@@ -84,8 +85,7 @@ public class PlayerData : MonoBehaviour, IDataPersistence
                 battleActive = true;
             }
         }
-
-
+        this.transform.position = playerLoc;
 
         Debug.Log("Loaded data was set.");
     }
