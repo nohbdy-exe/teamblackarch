@@ -19,16 +19,9 @@ public class PlayerData : MonoBehaviour, IDataPersistence
     public float playerMaxMana = 100;
     public float playerMaxHealth = 100;
     public bool battleActive;
-    /*
-    [Header("Player HUD Info:")]
-    [SerializeField] public GameObject PlayerLevelHUD;
-    [SerializeField] public GameObject PlayerSkillPointsHUD;
-    [SerializeField] public GameObject PlayerHealthHUD;
-    [SerializeField] public GameObject PlayerManaHUD;
-    [SerializeField] public GameObject PlayerExpHUD;
-    [SerializeField] public TextMeshProUGUI playerHealthText;
-    */
-
+    private bool playerDeath;
+    
+    #region Loading System:
     public void LoadData(GameData data)
     {
         Debug.Log("PlayerData Load Data was called");
@@ -93,10 +86,11 @@ public class PlayerData : MonoBehaviour, IDataPersistence
                 battleActive = true;
             }
         }
-        this.transform.position = playerLoc;
+       
 
         Debug.Log("Loaded data was set.");
     }
+    #endregion
     public void CheckLevelingSystem()
     {
         //Check to see if the player has leveled up
@@ -121,6 +115,7 @@ public class PlayerData : MonoBehaviour, IDataPersistence
         if (playerHealth <= 0)
         {
             playerHealth = 0;
+            playerDeath = true;
         }
         //Check to see if player's HP is higher than allowed
         if (playerHealth > playerMaxHealth)
@@ -153,4 +148,59 @@ public class PlayerData : MonoBehaviour, IDataPersistence
         CheckLevelingSystem();
         CheckMPStatus();
     }
+    #region Battle Data Updater:
+    public void UpdatePlayerHPfromDamage(float incomingDamage)
+    {
+        if (incomingDamage != 0)
+        {
+            //Check to see if boss can sustain hit
+            if (playerHealth > incomingDamage)
+            {
+                playerHealth -= incomingDamage;
+                playerDeath = false;
+            }
+            if (playerHealth <= incomingDamage)
+            {
+                playerHealth = 0;
+                playerDeath = true;
+            }
+        }
+    }
+    public void UpdatePlayerHPfromHeal(float incomingHeal)
+    {
+        if (playerHealth != playerMaxHealth)
+        {
+            if (incomingHeal != 0)
+            {
+                if (incomingHeal + playerHealth > playerMaxHealth)
+                {
+                    playerHealth = playerMaxHealth;
+                }
+                if (incomingHeal + playerHealth <= playerMaxHealth)
+                {
+                    playerHealth += incomingHeal;
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("Boss is at max health");
+        }
+    }
+    public void UpdatePlayerMPfromUse(float costMP)
+    {
+        playerMana -= costMP;
+    }
+    public void UpdatePlayerMPfromRecharge(float recharge)
+    {
+        if (playerMana + recharge <= playerMaxMana)
+        {
+            playerMana += recharge;
+        }
+        else
+        {
+            playerMana = playerMaxMana;
+        }
+    }
+    #endregion
 }
