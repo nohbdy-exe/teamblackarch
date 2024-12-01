@@ -243,6 +243,7 @@ MonoBehaviour:
   TimeDivider: 3
   animator: {fileID: 7307790}
   playerData: {fileID: 7307788}
+  oldManNPC: {fileID: 0}
 --- !u!114 &7307788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1f1082580c03614ca837c39e270cd27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerLoc: {x: 0, y: 0}
+  playerLoc: {x: -3.42, y: -0.83}
   playerLevel: 0
   sceneNum: 0
   playerHealth: 0
@@ -945,7 +946,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &637010954

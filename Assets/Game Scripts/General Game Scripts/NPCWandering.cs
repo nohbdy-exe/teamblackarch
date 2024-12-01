@@ -10,14 +10,15 @@ public class NPCWandering : MonoBehaviour
     [SerializeField] private float npcSpeed;
     [SerializeField] private float npcPauseTime;
     [SerializeField] private Animator npcAnim;
-    [SerializeField] private Dialog npcDialog;
-    [SerializeField] private string npcCharacterName;
+    public Dialog npcDialog;
+    public string npcCharacterName;
     [SerializeField] private SpriteRenderer npcSpriteRenderer;
     public Player_Movement player;
     private int currentWaypointIndex = 0;
     private bool isMovingForward = true;
     private Rigidbody2D rb;
-    public bool playerInRange = false;
+    private bool playerInRange = false;
+    private Coroutine wanderCoroutine;
 
 
     // Start is called before the first frame update
@@ -25,9 +26,10 @@ public class NPCWandering : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Kinematic;
+        playerInRange = false;
         if (waypoints.Length > 0)
         {
-            StartCoroutine(NPCWander());
+            wanderCoroutine = StartCoroutine(NPCWander());
         }
         else
         {
@@ -35,17 +37,16 @@ public class NPCWandering : MonoBehaviour
         }
     }
 
+    public bool GetPlayerInRange()
+    {
+        return this.playerInRange;
+    }
+
     // Update is called once per frame
     void Update()
     {
         UpdateAnimation();
         CheckOrderLayer();
-
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
-        {
-            Debug.Log("Player pressed E");
-            StartCoroutine(HandleDialog());
-        }
     }
 
     void CheckOrderLayer()
@@ -58,6 +59,15 @@ public class NPCWandering : MonoBehaviour
         {
             npcSpriteRenderer.sortingOrder = -1;
         }
+    }
+
+    public bool IfNPCVelocityZero()
+    {
+        if(rb.velocity == Vector2.zero)
+        {
+            return true;
+        }
+        else { return false; }
     }
 
     void UpdateAnimation()
@@ -74,14 +84,6 @@ public class NPCWandering : MonoBehaviour
         {
             npcAnim.SetBool("Walking", false);
         }
-    }
-
-    private IEnumerator HandleDialog()
-    {
-        Debug.Log("Dialog ended, resuming NPC wandering.");
-        rb.velocity = Vector2.zero;
-        DialogManager.Instance.ShowDialog(npcDialog, npcCharacterName);
-        yield return null;
     }
 
     private IEnumerator NPCWander()
@@ -108,7 +110,7 @@ public class NPCWandering : MonoBehaviour
                 if (currentWaypointIndex < 0)
                 {
                     currentWaypointIndex = 1;
-                    isMovingForward=true;
+                    isMovingForward = true;
                 }
             }
         }
@@ -138,7 +140,7 @@ public class NPCWandering : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerInRange = true;
+            this.playerInRange = true;
         }
     }
 
@@ -146,7 +148,7 @@ public class NPCWandering : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerInRange = true;
+            this.playerInRange = true;
         }
     }
 
@@ -154,9 +156,30 @@ public class NPCWandering : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerInRange = false;
+            this.playerInRange = false;
+            StopCoroutine(DialogManager.Instance.ShowDialog(npcDialog, npcCharacterName));
+            ResumeWanderingAfterDialog();
         }
     }
 
+    public void TalkToNPC()
+    {
+        if (wanderCoroutine != null)
+        {
+            StopCoroutine(wanderCoroutine);
+            wanderCoroutine = null;
+        }
+
+        rb.velocity = Vector2.zero;
+        StartCoroutine(DialogManager.Instance.ShowDialog(npcDialog, npcCharacterName));
+    }
+
+    public void ResumeWanderingAfterDialog()
+    {
+        if (wanderCoroutine == null)
+        {
+            wanderCoroutine = StartCoroutine(NPCWander());
+        }
+    }
 
 }

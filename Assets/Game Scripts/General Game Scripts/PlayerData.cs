@@ -13,6 +13,7 @@ public class PlayerData : MonoBehaviour, IDataPersistence
     public float playerMana;
     public float playerExp;
     public float playerExpMax;
+    public string playerName;
     public int playerSP;
     public int playerMaxLvl=5;
     public float playerMaxMana = 100;
@@ -40,6 +41,7 @@ public class PlayerData : MonoBehaviour, IDataPersistence
         this.playerExpMax = data.playerXPMax;
         this.playerMaxHealth = data.playerMaxHP;
         this.playerMaxMana = data.playerMaxMP;
+        this.playerName = data.playerNick;
     }
     public void SaveData(ref GameData data)
     {
@@ -53,10 +55,16 @@ public class PlayerData : MonoBehaviour, IDataPersistence
         data.playerXPMax = this.playerExpMax;
         data.playerMaxHP = this.playerMaxHealth;
         data.playerMaxMP = this.playerMaxMana;
+        data.playerNick = this.playerName;
         //Debug.Log("Attempting to save scene number to " + playerLevel.ToString() + ", Player location to x: " + playerLoc.x.ToString() + ", y: " + playerLoc.y.ToString());
         //Debug.Log("Data saved scene number to " + data.playerLvl.ToString() + ", Player location to x: " + data.playerLocation.x.ToString() + ", y: " + data.playerLocation.y.ToString() + ", Player level to: " + data.playerLvl.ToString());
     }
     
+    public void SetPlayerName(string playername)
+    {
+        this.playerName = playername;
+    }
+
     private void SetDataToSave()
     {
         sceneNum = SceneManager.GetActiveScene().buildIndex;

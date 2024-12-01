@@ -15,6 +15,7 @@ public class HUDScript : MonoBehaviour
     //[SerializeField] public GameObject PlayerHpHUD;
     [SerializeField] public Scrollbar PlayerManaHUD;
     [SerializeField] public Scrollbar PlayerExpHUD;
+    [SerializeField] public TextMeshProUGUI playerCharacterName;
     [SerializeField] public TextMeshProUGUI playerHealthText;
     [SerializeField] public TextMeshProUGUI playerManaText;
     [SerializeField] public TextMeshProUGUI playerExpText;
@@ -24,11 +25,12 @@ public class HUDScript : MonoBehaviour
 
     public void UpdateHUDInfo()
     {
+        playerCharacterName.text = playerdata.playerName;
         playerHealthText.text = (playerdata.playerHealth + " / " + playerdata.playerMaxHealth);
         playerManaText.text = (playerdata.playerMana + " / " + playerdata.playerMaxMana);
         playerExpText.text = ("XP: " + playerdata.playerExp + " / " + playerdata.playerExpMax);
-        playerLevelText.text = (": " + playerdata.playerLevel);
-        playerSkillPointsText.text = (": " + playerdata.playerSP);
+        playerLevelText.text = ""+playerdata.playerLevel;
+        playerSkillPointsText.text = ""+playerdata.playerSP;
 
         //Move Player HP Bar
         if (playerdata.playerHealth > 0)

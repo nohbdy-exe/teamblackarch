@@ -36,8 +36,8 @@ public class DialogManager : MonoBehaviour
             }
             else {
                 dialogBox.SetActive(false);
-                currentLine = 0;
                 OnHideDialog?.Invoke();
+                currentLine = 0;
             }
         }
     }

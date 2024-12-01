@@ -11,6 +11,7 @@ public class OptionsMenuScript : MonoBehaviour
 {
     [SerializeField] private AudioSource doorOpen;
     [SerializeField] private AudioSource doorClose;
+    [SerializeField] private ChangeBackgroundLoop backgroundLoop;
     [SerializeField] private RandomSoundsScript walkingNoises;
     public bool musicMuted = false;
     public bool sfxMuted = false;
@@ -76,6 +77,7 @@ public class OptionsMenuScript : MonoBehaviour
         walkingNoises.randomSound.volume = sfxVolume;
         doorOpen.volume = sfxVolume;
         doorClose.volume = sfxVolume;
+        backgroundLoop.audioSource.volume = sfxVolume;
     }
     public void MusicVolumeChanged()
     {
@@ -110,6 +112,7 @@ public class OptionsMenuScript : MonoBehaviour
         walkingNoises.randomSound.volume = sfxVolume;
         doorOpen.volume = sfxVolume;
         doorClose.volume = sfxVolume;
+        backgroundLoop.audioSource.volume = sfxVolume;
     }
     public void returnButtonPressed()
     {

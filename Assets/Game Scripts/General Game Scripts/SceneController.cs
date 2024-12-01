@@ -28,7 +28,7 @@ public class SceneController : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
@@ -55,6 +55,11 @@ public class SceneController : MonoBehaviour
         StartCoroutine(LoadSpecificScene(sceneName));
     }
 
+    public void ExitGame()
+    {
+        StartCoroutine(ExitApplication());
+    }
+
     IEnumerator LoadCaves()
     {
         sceneTransition.SetTrigger("End");
@@ -76,8 +81,15 @@ public class SceneController : MonoBehaviour
     {
         sceneTransition.SetTrigger("End");
         yield return new WaitForSeconds(1);
-        SceneManager.LoadSceneAsync(sceneName);
+        SceneManager.LoadScene(sceneName);
         sceneTransition.SetTrigger("Start");
+    }
+
+    IEnumerator ExitApplication()
+    {
+        sceneTransition.SetTrigger("End");
+        Application.Quit();
+        yield return null;
     }
 
 }

@@ -15,6 +15,7 @@ public class GameData
     public int playerSkillPoints;
     public float playerMaxHP;
     public float playerMaxMP;
+    public string playerNick;
     
     
     //This houses the values the game will start with when there is no data to load
@@ -22,7 +23,7 @@ public class GameData
     {
         playerLocation = new Vector2 (0f,0f);
         playerLvl = 1;
-        sceneNumber = 1;
+        sceneNumber = 2;
         playerHP = 100;
         playerMP = 100;
         playerXP = 0;
@@ -30,6 +31,22 @@ public class GameData
         playerSkillPoints = 0;
         playerMaxHP = 100;
         playerMaxMP = 100;
+        playerNick = "Unknown";
+    }
+
+    public GameData(string playerName)
+    {
+        playerLocation = new Vector2(0f, 0f);
+        playerLvl = 1;
+        sceneNumber = 2;
+        playerHP = 100;
+        playerMP = 100;
+        playerXP = 0;
+        playerXPMax = 50;
+        playerSkillPoints = 0;
+        playerMaxHP = 100;
+        playerMaxMP = 100;
+        playerNick = playerName;
     }
     
 

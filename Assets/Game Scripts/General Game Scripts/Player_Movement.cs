@@ -13,6 +13,8 @@ public class Player_Movement : MonoBehaviour
     private bool playerIsPaused = false;
     private bool isMovingHorizontal = false;
     private bool isMovingVertical = false;
+    [Header("Interactible NPCs")]
+    [SerializeField] private NPCWandering oldManNPC;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,11 @@ public class Player_Movement : MonoBehaviour
     {
         PlayerMovement();
         UpdateAnimation();
+
+        if (Input.GetKeyUp(KeyCode.E) && oldManNPC.GetPlayerInRange() && oldManNPC.IfNPCVelocityZero())
+        {
+            oldManNPC.TalkToNPC();
+        }
     }
 
     public bool PlayerIsMoving()

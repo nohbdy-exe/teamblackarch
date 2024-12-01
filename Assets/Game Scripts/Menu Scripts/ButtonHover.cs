@@ -5,28 +5,27 @@ using UnityEngine.EventSystems;
 
 public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
 {
-    private AudioSource audioSource;
-    public AudioClip hoverSound;
-    public AudioClip pressedSound;
+    public AudioSource hoverSound;
+    public AudioSource clickSound;
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        hoverSound = GetComponent<AudioSource>();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (hoverSound != null && audioSource != null)
+        if (hoverSound != null)
         {
-            audioSource.PlayOneShot(hoverSound);
+            hoverSound.Play();
         }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (pressedSound != null && audioSource != null)
+        if (clickSound != null)
         {
-            audioSource.PlayOneShot(pressedSound);
+            clickSound.Play();
         }
     }
 }

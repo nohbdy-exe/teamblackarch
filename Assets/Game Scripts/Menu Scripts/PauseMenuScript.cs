@@ -20,6 +20,8 @@ public class PauseMenuScript : MonoBehaviour
     [SerializeField] private Button ResumeButton;
     [SerializeField] private Button OptionsButton;
     [SerializeField] private Button QuitButton;
+    [SerializeField] private SceneController sceneController;
+
     public void ResumeGame()
     {
         //Resumes Game
@@ -80,7 +82,7 @@ public class PauseMenuScript : MonoBehaviour
         //Returns to Main Menu
         Debug.Log("Quiting Game");
         Time.timeScale = 1;
-        SceneManager.LoadSceneAsync(0);
+        sceneController.EnterCustomScene("TitleScreen");
         
     }
     

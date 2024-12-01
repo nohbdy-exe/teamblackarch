@@ -14,6 +14,7 @@ public class GameMenuLauncher : MonoBehaviour
     public SceneController sceneController;
     public float mySfxVolume=1;
     public float myMusicVolume=1;
+    bool playerHudToggle = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,22 +44,41 @@ public class GameMenuLauncher : MonoBehaviour
                 Resume();
             }
         }
+        if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            if (isPaused == false)
+            {
+                isPaused = true;
+                PauseStatus();
+            }
+            else if (isPaused == true && optionMenuUI.activeSelf == false)
+            {
+                isPaused = false;
+                PauseStatus();
+            }
+        }
     }
     public void Pause()
     {
 
         Time.timeScale = 0;
         pauseMenuUI.SetActive(true);
-        playerHUD.SetActive(false);
         playerChar.PausePlayerMovement();
 
     }
+
+    public void PauseStatus()
+    {
+        playerHudToggle = !playerHudToggle;
+        playerHUD.SetActive(playerHudToggle);
+    }
+
     public void Resume()
     {
 
         Time.timeScale = 1;
         pauseMenuUI.SetActive(false);
-        playerHUD.SetActive(true);
+        playerHUD.SetActive(false);
         playerChar.PausePlayerMovement();
 
     }

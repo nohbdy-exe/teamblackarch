@@ -16,6 +16,7 @@ public class MainMenuScript : MonoBehaviour
     [SerializeField] private Button confirmNoGameBtn;
     [SerializeField] private TextMeshProUGUI confirmText;
     [SerializeField] private AudioSource audioConfirmSound;
+    [SerializeField] private SceneController sceneController;
 
     private void Start()
     {
@@ -23,18 +24,19 @@ public class MainMenuScript : MonoBehaviour
         {
             continueGameBtn.interactable = false;
         }
+        sceneController.gameObject.SetActive(true);
 
     }
     public void ContinueGame()
     {
         DisableMenuButtons();
-        SceneManager.LoadSceneAsync("Level_1");
+        sceneController.EnterCustomScene("Level_1");
     }
 
     public void OnConfirmYesClick()
     {
         DataPersistenceManager.Instance.NewGame();
-        SceneManager.LoadSceneAsync("Level_1");
+        sceneController.EnterCustomScene("CharacterCreation");
     }
 
     public void OnConfirmNoClick()
@@ -50,7 +52,7 @@ public class MainMenuScript : MonoBehaviour
         {
             DataPersistenceManager.Instance.NewGame();
 
-            SceneManager.LoadSceneAsync("Level_1");
+            sceneController.EnterCustomScene("Level_1");
         }
         else
         {    
@@ -63,7 +65,7 @@ public class MainMenuScript : MonoBehaviour
     public void QuitGame()
     {
         DisableMenuButtons();
-        Application.Quit();
+        sceneController.ExitGame();
     }
 
   

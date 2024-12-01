@@ -65,11 +65,13 @@ public class DataPersistenceManager : MonoBehaviour
     public void NewGame()
     {
         this.gameData = new GameData();
-
-        SceneManager.LoadScene(gameData.sceneNumber);
-        
     }
-    
+
+    public void NewGameNamed(string playerName)
+    {
+        this.gameData = new GameData(playerName);
+    }
+
     public void LoadGame()
     {
         //Load any saved data from a file GameData FileDataHandler.Load()
