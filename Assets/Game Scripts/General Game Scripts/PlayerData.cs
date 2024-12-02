@@ -19,7 +19,7 @@ public class PlayerData : MonoBehaviour, IDataPersistence
     public float playerMaxMana = 100;
     public float playerMaxHealth = 100;
     public bool battleActive;
-    private bool playerDeath;
+    public bool playerDeath;
     
     #region Loading System:
     public void LoadData(GameData data)

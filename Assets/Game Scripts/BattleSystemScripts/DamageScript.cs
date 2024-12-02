@@ -65,7 +65,10 @@ public class DamageScript : MonoBehaviour
         if (!playerTurn && !bossTurn)
         {
             PlayerInputUI.SetActive(false);
-            //Do something for whichever death occured (ie player restart last checkpoint / player wins add XP)
+            if (bossTurn)
+            {
+
+            }
         }
     }
     
@@ -111,7 +114,8 @@ public class DamageScript : MonoBehaviour
         }
         PopulatePlayerStats();
         SetPlayerTurn();
-        
+        CheckDeaths();
+
 
     }
     #endregion
@@ -122,7 +126,9 @@ public class DamageScript : MonoBehaviour
         bossOutputDamage = bossPhysicalAttackDamage * rndMultiplier;
         playerScript.UpdatePlayerHPfromDamage(bossOutputDamage);
         Debug.Log("Boss uses physical attack");
-        
+        //Show what boss is doing
+        //PLay animations here
+
     }
     private void BossMagicAttack()
     {
@@ -130,7 +136,8 @@ public class DamageScript : MonoBehaviour
         bossOutputDamage = bossMagicAttackDamage * rndMultiplier;
         playerScript.UpdatePlayerHPfromDamage(bossOutputDamage);
         Debug.Log("Boss uses magical attack");
-        
+        //Show what boss is doing
+        //PLay animations here
     }
     private void BossHeal()
     {
@@ -138,7 +145,8 @@ public class DamageScript : MonoBehaviour
         bossSelfHeal = bossHealFactor * rndMultiplier;
         bossScript.UpdateBossHPfromHeal(bossSelfHeal);
         Debug.Log("Boss uses heal");
-        
+        //Show what boss is doing
+        //PLay animations here
     }
     #endregion
     #region Player Turn Options:
@@ -151,9 +159,9 @@ public class DamageScript : MonoBehaviour
             playerOutputDamage = playerPhysicalAttackDamage * rndMultiplier;
             bossScript.UpdateBossHPfromDamage(playerOutputDamage);
             playerScript.UpdatePlayerMPfromUse(mpCost);
+            //PLay animations here
             PopulatePlayerStats();
             SetBossTurn();
-           
 
         }
         
@@ -167,9 +175,10 @@ public class DamageScript : MonoBehaviour
             playerOutputDamage = playerMagicAttackDamage * rndMultiplier;
             bossScript.UpdateBossHPfromDamage(playerOutputDamage);
             playerScript.UpdatePlayerMPfromUse(mpCost);
+            //PLay animations here
+            
             PopulatePlayerStats();
             SetBossTurn();
-           
         }
         
     }
@@ -182,6 +191,7 @@ public class DamageScript : MonoBehaviour
             playerSelfHeal = playerHealFactor * rndMultiplier;
             playerScript.UpdatePlayerHPfromHeal(playerSelfHeal);
             playerScript.UpdatePlayerMPfromUse(mpCost);
+            //PLay animations here
             PopulatePlayerStats();
             SetBossTurn();
             
@@ -193,24 +203,57 @@ public class DamageScript : MonoBehaviour
         rndMultiplier = Random.Range(4, 16);
         playerManaCharge = playerManaChargeFactor * rndMultiplier;
         playerScript.UpdatePlayerMPfromRecharge(playerManaCharge);
+        //PLay animations here
         PopulatePlayerStats();
         SetBossTurn();
-        
     }
     private void SetBossTurn()
     {
-        playerTurn = false;
-        bossTurn = true;
-        
-        PlayerInputUI.SetActive(false);
-        StartCoroutine(WaitTime(2));
+        if (playerScript.playerDeath == false && bossScript.bossDeath == false)
+        {
+            playerTurn = false;
+            bossTurn = true;
+            PlayerInputUI.SetActive(false);
+            StartCoroutine(WaitTime(2));
+        }
+        else
+        {
+            CheckDeaths();
+        }
     }
     private void SetPlayerTurn()
     {
-        bossTurn = false;
-        playerTurn = true;
-        PlayerInputUI.SetActive(true);
-        StartCoroutine(WaitTime(2));
+        if (playerScript.playerDeath == false && bossScript.bossDeath == false)
+        {
+            bossTurn = false;
+            playerTurn = true;
+            PlayerInputUI.SetActive(true);
+            StartCoroutine(WaitTime(2));
+        }
+        else
+        {
+            CheckDeaths();
+        }
+    }
+    private void CheckDeaths()
+    {
+        if (playerScript.playerDeath == true && bossScript.bossDeath == false)
+        {
+            playerTurn = false;
+            bossTurn = false;
+            PlayerInputUI.SetActive(false);
+            //You lose UI
+        }
+        else if (playerScript.playerDeath == false && bossScript.bossDeath == true)
+        {
+            playerTurn = false;
+            bossTurn = false;
+            PlayerInputUI.SetActive(false);
+            //You win UI
+            // Go to credits
+        }
+       
+
     }
     #endregion
 }
