@@ -251,6 +251,7 @@ MonoBehaviour:
   playerMaxMana: 100
   playerMaxHealth: 100
   battleActive: 1
+  playerDeath: 0
 --- !u!82 &7307789
 AudioSource:
   m_ObjectHideFlags: 0
