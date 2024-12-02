@@ -8,6 +8,8 @@ public class DamageScript : MonoBehaviour
     bool playerTurn;
     bool bossTurn;
     int bossRndSelect;
+    [SerializeField] private Animator playerAnimator;
+    [SerializeField] private Animator bossAnimator;
     private float bossOutputDamage;
     private float bossPhysicalAttackDamage = 3;
     private float rndMultiplier;
@@ -127,7 +129,7 @@ public class DamageScript : MonoBehaviour
         playerScript.UpdatePlayerHPfromDamage(bossOutputDamage);
         Debug.Log("Boss uses physical attack");
         //Show what boss is doing
-        //PLay animations here
+        bossAnimator.SetTrigger("TheFallenAttack");
 
     }
     private void BossMagicAttack()
@@ -137,7 +139,7 @@ public class DamageScript : MonoBehaviour
         playerScript.UpdatePlayerHPfromDamage(bossOutputDamage);
         Debug.Log("Boss uses magical attack");
         //Show what boss is doing
-        //PLay animations here
+        bossAnimator.SetTrigger("TheFallenAttack");
     }
     private void BossHeal()
     {
@@ -159,7 +161,7 @@ public class DamageScript : MonoBehaviour
             playerOutputDamage = playerPhysicalAttackDamage * rndMultiplier;
             bossScript.UpdateBossHPfromDamage(playerOutputDamage);
             playerScript.UpdatePlayerMPfromUse(mpCost);
-            //PLay animations here
+            playerAnimator.SetTrigger("PlayerAttack");
             PopulatePlayerStats();
             SetBossTurn();
 
@@ -175,8 +177,8 @@ public class DamageScript : MonoBehaviour
             playerOutputDamage = playerMagicAttackDamage * rndMultiplier;
             bossScript.UpdateBossHPfromDamage(playerOutputDamage);
             playerScript.UpdatePlayerMPfromUse(mpCost);
-            //PLay animations here
-            
+            playerAnimator.SetTrigger("PlayerAttack");
+
             PopulatePlayerStats();
             SetBossTurn();
         }
@@ -191,7 +193,7 @@ public class DamageScript : MonoBehaviour
             playerSelfHeal = playerHealFactor * rndMultiplier;
             playerScript.UpdatePlayerHPfromHeal(playerSelfHeal);
             playerScript.UpdatePlayerMPfromUse(mpCost);
-            //PLay animations here
+            
             PopulatePlayerStats();
             SetBossTurn();
             
@@ -214,7 +216,7 @@ public class DamageScript : MonoBehaviour
             playerTurn = false;
             bossTurn = true;
             PlayerInputUI.SetActive(false);
-            StartCoroutine(WaitTime(2));
+            StartCoroutine(WaitTime(5));
         }
         else
         {
@@ -228,7 +230,7 @@ public class DamageScript : MonoBehaviour
             bossTurn = false;
             playerTurn = true;
             PlayerInputUI.SetActive(true);
-            StartCoroutine(WaitTime(2));
+            StartCoroutine(WaitTime(5));
         }
         else
         {
