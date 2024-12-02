@@ -9,9 +9,9 @@ public class DamageScript : MonoBehaviour
     bool bossTurn;
     int bossRndSelect;
     private float bossOutputDamage;
-    private float bossPhysicalAttackDamage = 5;
+    private float bossPhysicalAttackDamage = 3;
     private float rndMultiplier;
-    private float bossMagicAttackDamage = 3;
+    private float bossMagicAttackDamage = 2;
     private float bossHealFactor = 4;
     private float bossSelfHeal;
     private float playerOutputDamage;
@@ -22,6 +22,7 @@ public class DamageScript : MonoBehaviour
     private float playerManaChargeFactor = 5;
     private float playerManaCharge;
     private float mpCost;
+    [SerializeField] private GameObject PlayerInputUI;
     [SerializeField] TheFallenData bossScript;
     [SerializeField] PlayerData playerScript;
     [SerializeField] TMP_Text playerHPText;
@@ -31,6 +32,7 @@ public class DamageScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         playerTurn = true;
         bossTurn = false;
         Debug.Log(playerScript.playerName);
@@ -38,6 +40,7 @@ public class DamageScript : MonoBehaviour
         playerHPText.text = "HP:" + playerScript.playerHealth + "/" + playerScript.playerMaxHealth;
         playerMPText.text = "MP:" + playerScript.playerMana + "/" + playerScript.playerMaxMana;
         bossHPText.text = "HP: " + bossScript.bossHP + "/" + bossScript.bossMaxHP;
+        RunBattleInputSystem();
     }
 
     // Update is called once per frame
@@ -51,22 +54,48 @@ public class DamageScript : MonoBehaviour
     {
         if (playerTurn && !bossTurn)
         {
-            
+            PlayerInputUI.SetActive(true);
+            PlayerInput();
         }
         if (bossTurn && !playerTurn)
         {
+            PlayerInputUI.SetActive(false);
             BossInput();
         }
         if (!playerTurn && !bossTurn)
         {
+            PlayerInputUI.SetActive(false);
             //Do something for whichever death occured (ie player restart last checkpoint / player wins add XP)
         }
     }
     public void PlayerInput()
     {
-        //Populate this once UI is running
-        playerTurn = false;
-        bossTurn = true;
+
+       
+        PopulatePlayerStats();
+
+    }
+    public IEnumerator WaitTime(float time)
+    {
+
+        yield return new WaitForSeconds(time);
+        RunBattleInputSystem();
+        /* if (bossTurn)
+        {
+            bossTurn = false;
+            playerTurn = true;
+            
+        }
+        else
+        {
+            playerTurn = false;
+            bossTurn = true;
+            
+        }
+        */
+    }
+    private void PopulatePlayerStats()
+    {
         playerHPText.text = "HP: " + playerScript.playerHealth + "/" + playerScript.playerMaxHealth;
         playerMPText.text = "MP: " + playerScript.playerMana + "/" + playerScript.playerMaxMana;
         bossHPText.text = "HP: " + bossScript.bossHP + "/" + bossScript.bossMaxHP;
@@ -86,11 +115,9 @@ public class DamageScript : MonoBehaviour
         {
             BossHeal();
         }
-        bossTurn = false;
-        playerTurn = true;
-        playerHPText.text = "HP: " + playerScript.playerHealth + "/" + playerScript.playerMaxHealth;
-        playerMPText.text = "MP: " + playerScript.playerMana + "/" + playerScript.playerMaxMana;
-        bossHPText.text = "HP: " + bossScript.bossHP + "/" + bossScript.bossMaxHP;
+
+        SetPlayerTurn();
+        PopulatePlayerStats();
 
     }
     #endregion
@@ -100,22 +127,28 @@ public class DamageScript : MonoBehaviour
         rndMultiplier = Random.Range(3, 12);
         bossOutputDamage = bossPhysicalAttackDamage * rndMultiplier;
         playerScript.UpdatePlayerHPfromDamage(bossOutputDamage);
+        Debug.Log("Boss uses physical attack");
+        RunBattleInputSystem();
     }
     private void BossMagicAttack()
     {
         rndMultiplier = Random.Range(3, 25);
         bossOutputDamage = bossMagicAttackDamage * rndMultiplier;
         playerScript.UpdatePlayerHPfromDamage(bossOutputDamage);
+        Debug.Log("Boss uses magical attack");
+        RunBattleInputSystem();
     }
     private void BossHeal()
     {
         rndMultiplier = Random.Range(5, 22);
         bossSelfHeal = bossHealFactor * rndMultiplier;
         bossScript.UpdateBossHPfromHeal(bossSelfHeal);
+        Debug.Log("Boss uses heal");
+        RunBattleInputSystem();
     }
     #endregion
     #region Player Turn Options:
-    private void PlayerPhysicalAttack()
+    public void PlayerPhysicalAttack()
     {
         mpCost = 18;
         if (playerScript.playerMana >= mpCost)
@@ -124,10 +157,13 @@ public class DamageScript : MonoBehaviour
             playerOutputDamage = playerPhysicalAttackDamage * rndMultiplier;
             bossScript.UpdateBossHPfromDamage(playerOutputDamage);
             playerScript.UpdatePlayerMPfromUse(mpCost);
+            SetBossTurn();
+            StartCoroutine(WaitTime(2));
+
         }
         
     }
-    private void PlayerMagicAttack()
+    public void PlayerMagicAttack()
     {
         mpCost = 20;
         if (playerScript.playerMana >= mpCost)
@@ -136,10 +172,12 @@ public class DamageScript : MonoBehaviour
             playerOutputDamage = playerMagicAttackDamage * rndMultiplier;
             bossScript.UpdateBossHPfromDamage(playerOutputDamage);
             playerScript.UpdatePlayerMPfromUse(mpCost);
+            SetBossTurn();
+            StartCoroutine(WaitTime(2));
         }
         
     }
-    private void PlayerHeal()
+    public void PlayerHeal()
     {
         mpCost = 16;
         if (playerScript.playerMana >= mpCost)
@@ -148,14 +186,33 @@ public class DamageScript : MonoBehaviour
             playerSelfHeal = playerHealFactor * rndMultiplier;
             playerScript.UpdatePlayerHPfromHeal(playerSelfHeal);
             playerScript.UpdatePlayerMPfromUse(mpCost);
+            SetBossTurn();
+            StartCoroutine(WaitTime(2));
         }
         
     }
-    private void RechargeMana()
+    public void RechargeMana()
     {
         rndMultiplier = Random.Range(4, 16);
         playerManaCharge = playerManaChargeFactor * rndMultiplier;
         playerScript.UpdatePlayerMPfromRecharge(playerManaCharge);
+        SetBossTurn();
+        StartCoroutine(WaitTime(2));
+    }
+    private void SetBossTurn()
+    {
+        playerTurn = false;
+        bossTurn = true;
+        
+        PlayerInputUI.SetActive(false);
+        StartCoroutine(WaitTime(2));
+    }
+    private void SetPlayerTurn()
+    {
+        bossTurn = false;
+        playerTurn = true;
+        PlayerInputUI.SetActive(true);
+        StartCoroutine(WaitTime(2));
     }
     #endregion
 }

@@ -65,7 +65,7 @@ public class TheFallenData : MonoBehaviour
     public int rndSelection()
     {
         int rndSelection = 0;
-        if (bossHP < bossMaxHP)
+        if (bossHP < bossMaxHP -150)
         {
             rndSelection = Random.Range(1, 4);
         }
