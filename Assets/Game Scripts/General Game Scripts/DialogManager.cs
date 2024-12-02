@@ -37,9 +37,13 @@ public class DialogManager : MonoBehaviour
             else {
                 dialogBox.SetActive(false);
                 OnHideDialog?.Invoke();
-                currentLine = 0;
             }
         }
+    }
+
+    public void ResetDialog()
+    {
+        this.currentLine = 0;
     }
 
 
