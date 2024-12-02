@@ -17,8 +17,8 @@ public class DamageScript : MonoBehaviour
     private float bossHealFactor = 4;
     private float bossSelfHeal;
     private float playerOutputDamage;
-    private float playerPhysicalAttackDamage = 5;
-    private float playerMagicAttackDamage = 3;
+    private float playerPhysicalAttackDamage = 6;
+    private float playerMagicAttackDamage = 4;
     private float playerHealFactor = 4;
     private float playerSelfHeal;
     private float playerManaChargeFactor = 5;
@@ -31,6 +31,8 @@ public class DamageScript : MonoBehaviour
     [SerializeField] TMP_Text playerMPText;
     [SerializeField] TMP_Text bossHPText;
     [SerializeField] TMP_Text playerNameText;
+    [SerializeField] private GameObject winUI;
+    [SerializeField] private GameObject lossUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -93,6 +95,22 @@ public class DamageScript : MonoBehaviour
         }
         */
     }
+    public IEnumerator WinTime(float time)
+    {
+
+        yield return new WaitForSeconds(time);
+        winUI.SetActive(true);
+        lossUI.SetActive(false);
+       
+    }
+    public IEnumerator LoseTime(float time)
+    {
+
+        yield return new WaitForSeconds(time);
+        winUI.SetActive(false);
+        lossUI.SetActive(true);
+
+    }
     private void PopulatePlayerStats()
     {
         playerHPText.text = "HP: " + playerScript.playerHealth + "/" + playerScript.playerMaxHealth;
@@ -134,7 +152,7 @@ public class DamageScript : MonoBehaviour
     }
     private void BossMagicAttack()
     {
-        rndMultiplier = Random.Range(3, 25);
+        rndMultiplier = Random.Range(3, 22);
         bossOutputDamage = bossMagicAttackDamage * rndMultiplier;
         playerScript.UpdatePlayerHPfromDamage(bossOutputDamage);
         Debug.Log("Boss uses magical attack");
@@ -244,6 +262,8 @@ public class DamageScript : MonoBehaviour
             playerTurn = false;
             bossTurn = false;
             PlayerInputUI.SetActive(false);
+            playerAnimator.SetTrigger("PlayerDeath");
+            StartCoroutine(LoseTime(3));
             //You lose UI
         }
         else if (playerScript.playerDeath == false && bossScript.bossDeath == true)
@@ -251,6 +271,8 @@ public class DamageScript : MonoBehaviour
             playerTurn = false;
             bossTurn = false;
             PlayerInputUI.SetActive(false);
+            bossAnimator.SetTrigger("TheFallenDeath");
+            StartCoroutine(WinTime(3));
             //You win UI
             // Go to credits
         }
