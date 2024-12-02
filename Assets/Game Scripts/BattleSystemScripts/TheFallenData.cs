@@ -7,7 +7,7 @@ using UnityEngine;
 public class TheFallenData : MonoBehaviour
 {
     public float bossHP;
-    private float bossMaxHP = 350;
+    public float bossMaxHP = 350;
     public bool bossDeath = false;
     
     // Start is called before the first frame update

@@ -11,6 +11,8 @@ public class DialogManager : MonoBehaviour
     [SerializeField] Text dialogCharName;
     [SerializeField] int typeSpeed;
 
+    public bool dialogDone = false;
+
     Dialog dialog;
     int currentLine = 0;
     bool isTyping;
@@ -37,6 +39,7 @@ public class DialogManager : MonoBehaviour
             else {
                 dialogBox.SetActive(false);
                 OnHideDialog?.Invoke();
+                dialogDone = true;
             }
         }
     }

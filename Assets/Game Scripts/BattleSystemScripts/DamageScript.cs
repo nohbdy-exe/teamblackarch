@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
+using TMPro;
 
 public class DamageScript : MonoBehaviour
 {
@@ -24,11 +24,20 @@ public class DamageScript : MonoBehaviour
     private float mpCost;
     [SerializeField] TheFallenData bossScript;
     [SerializeField] PlayerData playerScript;
+    [SerializeField] TMP_Text playerHPText;
+    [SerializeField] TMP_Text playerMPText;
+    [SerializeField] TMP_Text bossHPText;
+    [SerializeField] TMP_Text playerNameText;
     // Start is called before the first frame update
     void Start()
     {
         playerTurn = true;
         bossTurn = false;
+        Debug.Log(playerScript.playerName);
+        playerNameText.text = playerScript.playerName;
+        playerHPText.text = "HP:" + playerScript.playerHealth + "/" + playerScript.playerMaxHealth;
+        playerMPText.text = "MP:" + playerScript.playerMana + "/" + playerScript.playerMaxMana;
+        bossHPText.text = "HP: " + bossScript.bossHP + "/" + bossScript.bossMaxHP;
     }
 
     // Update is called once per frame
@@ -58,6 +67,9 @@ public class DamageScript : MonoBehaviour
         //Populate this once UI is running
         playerTurn = false;
         bossTurn = true;
+        playerHPText.text = "HP: " + playerScript.playerHealth + "/" + playerScript.playerMaxHealth;
+        playerMPText.text = "MP: " + playerScript.playerMana + "/" + playerScript.playerMaxMana;
+        bossHPText.text = "HP: " + bossScript.bossHP + "/" + bossScript.bossMaxHP;
     }
     public void BossInput()
     {
@@ -76,6 +88,9 @@ public class DamageScript : MonoBehaviour
         }
         bossTurn = false;
         playerTurn = true;
+        playerHPText.text = "HP: " + playerScript.playerHealth + "/" + playerScript.playerMaxHealth;
+        playerMPText.text = "MP: " + playerScript.playerMana + "/" + playerScript.playerMaxMana;
+        bossHPText.text = "HP: " + bossScript.bossHP + "/" + bossScript.bossMaxHP;
 
     }
     #endregion

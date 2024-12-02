@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;
 
 public class NPCWandering : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class NPCWandering : MonoBehaviour
     private Rigidbody2D rb;
     private bool playerInRange = false;
     private Coroutine wanderCoroutine;
+    private bool questGiven;
+    [SerializeField] private TMP_Text questTitle;
+    [SerializeField] private TMP_Text questDescription;
 
 
     // Start is called before the first frame update
@@ -27,6 +31,7 @@ public class NPCWandering : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Kinematic;
         playerInRange = false;
+        questGiven = false;
         if (waypoints.Length > 0)
         {
             wanderCoroutine = StartCoroutine(NPCWander());
@@ -181,5 +186,17 @@ public class NPCWandering : MonoBehaviour
             wanderCoroutine = StartCoroutine(NPCWander());
         }
     }
+
+    /*
+    public void CreateQuest(string qTitle, string qDesc)
+    {
+        if (DialogManager.Instance.dialogDone && questGiven == false)
+        {
+            this.questGiven = true;
+            this.questTitle.text = qTitle;
+            this.questDescription.text = qDesc;
+        }
+    }
+    */
 
 }

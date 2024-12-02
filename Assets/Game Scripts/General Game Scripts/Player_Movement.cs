@@ -33,6 +33,7 @@ public class Player_Movement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.E) && oldManNPC.GetPlayerInRange() && oldManNPC.IfNPCVelocityZero())
         {
             oldManNPC.TalkToNPC();
+            //oldManNPC.CreateQuest("Bleak Beginnings", "Look for the cave entrance Southwest of the island.");
         }
     }
 
