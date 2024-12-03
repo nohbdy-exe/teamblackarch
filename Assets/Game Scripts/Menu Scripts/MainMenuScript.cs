@@ -52,7 +52,7 @@ public class MainMenuScript : MonoBehaviour
         {
             DataPersistenceManager.Instance.NewGame();
 
-            sceneController.EnterCustomScene("Level_1");
+            sceneController.EnterCustomScene("CharacterCreation");
         }
         else
         {    
