@@ -9,7 +9,11 @@ public class TheFallenData : MonoBehaviour
     public float bossHP;
     public float bossMaxHP = 350;
     public bool bossDeath = false;
-    
+    [SerializeField] private AudioClip bossAttackAudio;
+    [SerializeField] private AudioClip bossHealAudio;
+    [SerializeField] private AudioClip bossDeathAudio;
+    [SerializeField] private AudioSource bossAudioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +25,23 @@ public class TheFallenData : MonoBehaviour
     {
        
     }
-    
+    public void bossAttackSFX()
+    {
+        bossAudioSource.clip = bossAttackAudio;
+        bossAudioSource.volume = 100;
+        bossAudioSource.Play();
+    }
+    public void bossDeathSFX()
+    {
+        bossAudioSource.clip = bossDeathAudio;
+        bossAudioSource.Play();
+    }
+    public void bossHealSFX()
+    {
+        bossAudioSource.clip = bossHealAudio;
+        bossAudioSource.Play();
+    }
+
     public void UpdateBossHPfromDamage(float incomingDamage)
     {
         if (incomingDamage != 0)

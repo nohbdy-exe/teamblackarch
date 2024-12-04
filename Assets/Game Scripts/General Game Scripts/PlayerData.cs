@@ -20,7 +20,10 @@ public class PlayerData : MonoBehaviour, IDataPersistence
     public float playerMaxHealth = 100;
     public bool battleActive;
     public bool playerDeath;
-    
+    [SerializeField] private AudioClip playerAttackAudio;
+    [SerializeField] private AudioClip playerHealAudio;
+    [SerializeField] private AudioClip playerDeathAudio;
+    [SerializeField] private AudioSource playerAudioSource;
     #region Loading System:
     public void LoadData(GameData data)
     {
@@ -137,6 +140,22 @@ public class PlayerData : MonoBehaviour, IDataPersistence
             playerMana = playerMaxMana;
         }
     }
+    public void playerAttackSFX()
+    {
+        playerAudioSource.clip = playerAttackAudio;
+        playerAudioSource.volume = 100;
+        playerAudioSource.Play();
+    }
+    public void playerDeathSFX()
+    {
+        playerAudioSource.clip = playerDeathAudio;
+        playerAudioSource.Play();
+    }
+    public void playerHealSFX()
+    {
+        playerAudioSource.clip= playerHealAudio;
+        playerAudioSource.Play();
+    }
     void Start()
     { 
         this.SetDataToLoad();
@@ -202,5 +221,6 @@ public class PlayerData : MonoBehaviour, IDataPersistence
             playerMana = playerMaxMana;
         }
     }
+    
     #endregion
 }
