@@ -252,7 +252,6 @@ MonoBehaviour:
   playerMaxHealth: 100
   battleActive: 1
   playerDeath: 0
-  fallenShake: {fileID: 0}
   playerAttackAudio: {fileID: 8300000, guid: a9ff9a7d9d7b8ce478bb480f8677f5bd, type: 3}
   playerHealAudio: {fileID: 8300000, guid: b39c3368805518a4fa3e87fa7ba980fa, type: 3}
   playerDeathAudio: {fileID: 8300000, guid: 662163d9dc3c6344d9cd2a7c7c76a1a2, type: 3}
@@ -2267,7 +2266,7 @@ MonoBehaviour:
   bossHealAudio: {fileID: 8300000, guid: b39c3368805518a4fa3e87fa7ba980fa, type: 3}
   bossDeathAudio: {fileID: 8300000, guid: 953af4cb28957f249803ee7acbbb5154, type: 3}
   bossAudioSource: {fileID: 395044729}
-  shakeEffect: {fileID: 2012596474}
+  bossShake: {fileID: 2012596474}
 --- !u!114 &637010957
 MonoBehaviour:
   m_ObjectHideFlags: 0
