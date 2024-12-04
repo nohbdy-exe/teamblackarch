@@ -164,6 +164,7 @@ public class DamageScript : MonoBehaviour
         rndMultiplier = Random.Range(5, 22);
         bossSelfHeal = bossHealFactor * rndMultiplier;
         bossScript.UpdateBossHPfromHeal(bossSelfHeal);
+        bossScript.bossHealSFX();
         Debug.Log("Boss uses heal");
         //Show what boss is doing
         //PLay animations here
