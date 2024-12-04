@@ -29,6 +29,7 @@ public class DamageScript : MonoBehaviour
     Color red = Color.red;
     Color green = Color.green;
     Color blue = Color.blue;
+    Color purple = Color.magenta;
     [SerializeField] private GameObject PlayerInputUI;
     [SerializeField] TheFallenData bossScript;
     [SerializeField] PlayerData playerScript;
@@ -175,7 +176,7 @@ public class DamageScript : MonoBehaviour
         Debug.Log("Boss uses magical attack");
         //Show what boss is doing
         bossAnimator.SetTrigger("TheFallenAttack");
-        CallDamageIndicator(playerScript.transform, bossOutputDamage, red);
+        CallDamageIndicator(playerScript.transform, bossOutputDamage, purple);
     }
     private void BossHeal()
     {
@@ -218,7 +219,7 @@ public class DamageScript : MonoBehaviour
             bossScript.UpdateBossHPfromDamage(playerOutputDamage);
             playerScript.UpdatePlayerMPfromUse(mpCost);
             playerAnimator.SetTrigger("PlayerAttack");
-            CallDamageIndicator(bossScript.transform, playerOutputDamage, red);
+            CallDamageIndicator(bossScript.transform, playerOutputDamage, purple);
             PopulatePlayerStats();
             SetBossTurn();
         }
