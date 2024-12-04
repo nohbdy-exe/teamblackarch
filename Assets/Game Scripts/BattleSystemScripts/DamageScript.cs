@@ -8,8 +8,10 @@ public class DamageScript : MonoBehaviour
     bool playerTurn;
     bool bossTurn;
     int bossRndSelect;
+    [SerializeField] private GameObject damageTextPrefab;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private Animator bossAnimator;
+    private Canvas battleCanvasTag;
     private float bossOutputDamage;
     private float bossPhysicalAttackDamage = 3;
     private float rndMultiplier;
@@ -24,6 +26,9 @@ public class DamageScript : MonoBehaviour
     private float playerManaChargeFactor = 5;
     private float playerManaCharge;
     private float mpCost;
+    Color red = Color.red;
+    Color green = Color.green;
+    Color blue = Color.blue;
     [SerializeField] private GameObject PlayerInputUI;
     [SerializeField] TheFallenData bossScript;
     [SerializeField] PlayerData playerScript;
@@ -44,6 +49,7 @@ public class DamageScript : MonoBehaviour
         playerHPText.text = "HP:" + playerScript.playerHealth + "/" + playerScript.playerMaxHealth;
         playerMPText.text = "MP:" + playerScript.playerMana + "/" + playerScript.playerMaxMana;
         bossHPText.text = "HP: " + bossScript.bossHP + "/" + bossScript.bossMaxHP;
+        //battleCanvasTag = GameObject.FindGameObjectWithTag("BattleSceneCanvas").GetComponent<Canvas>();
         RunBattleInputSystem();
     }
 
@@ -138,6 +144,15 @@ public class DamageScript : MonoBehaviour
 
 
     }
+    private void CallDamageIndicator(Transform obj, float num, Color r)
+    {
+        Vector3 offset = new Vector3(0, 1, 0);
+        GameObject damageTextIndicator = Instantiate(damageTextPrefab, obj.position+offset, Quaternion.identity);
+        damageTextIndicator.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText(num.ToString());
+        damageTextIndicator.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = r;
+        damageTextIndicator.transform.parent = obj;
+    }
+
     #endregion
     #region Boss Turn Options
     private void BossPhysicalAttack()
@@ -148,6 +163,7 @@ public class DamageScript : MonoBehaviour
         Debug.Log("Boss uses physical attack");
         //Show what boss is doing
         bossAnimator.SetTrigger("TheFallenAttack");
+        CallDamageIndicator(playerScript.transform, bossOutputDamage, red);
 
     }
     private void BossMagicAttack()
@@ -158,6 +174,7 @@ public class DamageScript : MonoBehaviour
         Debug.Log("Boss uses magical attack");
         //Show what boss is doing
         bossAnimator.SetTrigger("TheFallenAttack");
+        CallDamageIndicator(playerScript.transform, bossOutputDamage, red);
     }
     private void BossHeal()
     {
@@ -166,9 +183,11 @@ public class DamageScript : MonoBehaviour
         bossScript.UpdateBossHPfromHeal(bossSelfHeal);
         bossScript.bossHealSFX();
         Debug.Log("Boss uses heal");
+        CallDamageIndicator(bossScript.transform, bossSelfHeal, green);
         //Show what boss is doing
         //PLay animations here
     }
+
     #endregion
     #region Player Turn Options:
     public void PlayerPhysicalAttack()
@@ -181,6 +200,7 @@ public class DamageScript : MonoBehaviour
             bossScript.UpdateBossHPfromDamage(playerOutputDamage);
             playerScript.UpdatePlayerMPfromUse(mpCost);
             playerAnimator.SetTrigger("PlayerAttack");
+            CallDamageIndicator(bossScript.transform, playerOutputDamage, red);
             PopulatePlayerStats();
             SetBossTurn();
 
@@ -197,7 +217,7 @@ public class DamageScript : MonoBehaviour
             bossScript.UpdateBossHPfromDamage(playerOutputDamage);
             playerScript.UpdatePlayerMPfromUse(mpCost);
             playerAnimator.SetTrigger("PlayerAttack");
-
+            CallDamageIndicator(bossScript.transform, playerOutputDamage, red);
             PopulatePlayerStats();
             SetBossTurn();
         }
@@ -225,6 +245,7 @@ public class DamageScript : MonoBehaviour
         playerManaCharge = playerManaChargeFactor * rndMultiplier;
         playerScript.UpdatePlayerMPfromRecharge(playerManaCharge);
         //PLay animations here
+        CallDamageIndicator(playerScript.transform, playerSelfHeal, blue);
         PopulatePlayerStats();
         SetBossTurn();
     }
