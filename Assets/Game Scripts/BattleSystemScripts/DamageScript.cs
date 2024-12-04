@@ -211,7 +211,7 @@ public class DamageScript : MonoBehaviour
             playerSelfHeal = playerHealFactor * rndMultiplier;
             playerScript.UpdatePlayerHPfromHeal(playerSelfHeal);
             playerScript.UpdatePlayerMPfromUse(mpCost);
-            
+            playerScript.playerHealSFX();
             PopulatePlayerStats();
             SetBossTurn();
             
