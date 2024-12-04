@@ -117,6 +117,7 @@ public class DamageScript : MonoBehaviour
         lossUI.SetActive(true);
 
     }
+
     private void PopulatePlayerStats()
     {
         playerHPText.text = "HP: " + playerScript.playerHealth + "/" + playerScript.playerMaxHealth;
@@ -233,6 +234,7 @@ public class DamageScript : MonoBehaviour
             playerScript.UpdatePlayerHPfromHeal(playerSelfHeal);
             playerScript.UpdatePlayerMPfromUse(mpCost);
             playerScript.playerHealSFX();
+            CallDamageIndicator(playerScript.transform, playerSelfHeal, green);
             PopulatePlayerStats();
             SetBossTurn();
             
@@ -245,7 +247,7 @@ public class DamageScript : MonoBehaviour
         playerManaCharge = playerManaChargeFactor * rndMultiplier;
         playerScript.UpdatePlayerMPfromRecharge(playerManaCharge);
         //PLay animations here
-        CallDamageIndicator(playerScript.transform, playerSelfHeal, blue);
+        CallDamageIndicator(playerScript.transform, playerManaCharge, blue);
         PopulatePlayerStats();
         SetBossTurn();
     }
