@@ -13,6 +13,7 @@ public class TheFallenData : MonoBehaviour
     [SerializeField] private AudioClip bossHealAudio;
     [SerializeField] private AudioClip bossDeathAudio;
     [SerializeField] private AudioSource bossAudioSource;
+    [SerializeField] private CameraShake bossShake;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +42,11 @@ public class TheFallenData : MonoBehaviour
     {
         bossAudioSource.clip = bossHealAudio;
         bossAudioSource.Play();
+    }
+
+    public void DoCameraShake()
+    {
+        StartCoroutine(bossShake.Shaking());
     }
 
     public void UpdateBossHPfromDamage(float incomingDamage)
