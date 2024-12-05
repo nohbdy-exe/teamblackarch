@@ -1,5 +1,8 @@
 # teamblackarch
-for cs478
+Project Started: August 2024
+Project Ended: December 4, 2024.
+Currently In Hiatus.
+
 # Game Title: Cambion
 
 This is our 2d RPG made in Unity.
